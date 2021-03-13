@@ -1,0 +1,37 @@
+<style>
+    input{
+        width: 250px;
+    }
+    .req{
+        color: #d93025;
+        margin-right: 2px;
+    }
+</style>
+<form method="POST" action="/edit-veri" id="form">
+    <br>
+    Estado: <span class="req">*</span><input required value="{{estado}}" type="text" id="estado" placeholder="Estado" name="estado"/>
+    <br>
+    Cidade: <span class="req">*</span><input required value="{{cidade}}" type="text" id="cidade" placeholder="Cidade" name="cidade"/>
+    <br>
+    Bairro: <span class="req">*</span><input required value="{{bairro}}" type="text" id="bairro" placeholder="Bairro" name="bairro"/>
+    <br>
+    Rua: <span class="req">*</span><input required value="{{rua}}" type="text" id="rua" placeholder="Rua" name="rua"/>
+    <br>
+    Número Da Casa: <span class="req">*</span><input required type="text" id="num" placeholder="Número Da Casa" name="num" value="{{num}}"/>
+    <br>
+    Complemento Ou Referência: <input type="text" id="comple" placeholder="Complemento Ou Referência" name="comple" value="{{comple}}">
+    <br>
+    <br>
+    <input type="submit" value="Enviar" id="enviar">
+    {{#if exclu}}
+        <input type="submit" value="Excluir" id="excluir" onclick="veri2()">
+    {{else}}
+        
+    {{/if}}
+</form>
+<script>
+    function veri2() {
+        var form = window.document.getElementById('form')
+        form.action = '/loca-delete'
+    }
+</script>

@@ -1,0 +1,36 @@
+{
+  "name": "Mercado-Node-Js",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "dev": "nodemon app.js",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Miguelpenha/Mercado-Node-Js.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Miguelpenha/Mercado-Node-Js/issues"
+  },
+  "homepage": "https://github.com/Miguelpenha/Mercado-Node-Js#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cep-promise": "^4.1.0",
+    "connect-flash": "^0.1.1",
+    "cookie-parser": "^1.4.5",
+    "crypto": "^1.0.1",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-handlebars": "^5.2.1",
+    "express-session": "^1.17.1",
+    "mongoose": "^5.12.0",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.2",
+    "nodemon": "^2.0.7"
+  }
+}

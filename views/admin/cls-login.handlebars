@@ -1,0 +1,18 @@
+<style>
+    .req{
+        color: #d93025;
+    }
+    #form {
+        position: absolute;
+        margin-left: 1%;
+        margin-top: 1%;
+    }
+    #bt {
+        margin-top: 3%;
+    }
+</style>
+<form method="post" action="/admin/cls" id="form">
+    Senha De Acesso: <span class="req">*</span><br><input type="password" name="senha" id="senha" autocomplete="current-password" required>
+    <br>
+    <input type="submit" value="Enviar" id="bt"/>
+</form>

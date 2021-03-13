@@ -1,0 +1,415 @@
+<style>
+    .tit{
+        text-align: center;
+        text-decoration: underline solid rgb(9, 116, 255);
+        margin-right: 33%;
+    }
+    .tit-nem{
+        position: absolute;
+        left: 0;
+        right: 0;
+        text-align: center;
+        margin-top: 5%;
+    }
+    .tit-food{
+        position: absolute;
+        width: 50%;
+        height: 100%;
+        font-size: 1.3vw;
+        margin-top: 2%;
+        margin-left: 2%;
+        color: #3E3E3E;
+        text-align: justify;
+    }
+    .img-food{
+        position: absolute;
+        border-radius: 5%;
+        width: 100%;
+        height: 40%;
+        object-fit: cover;
+        object-position: center;
+    }
+    .loca{
+        border: 0;
+        background-color: transparent;
+    }
+    .img-bolsa{
+        margin-left: 2800%;
+    }
+    .form_dele{
+        position: absolute;    
+    }
+    .lista {
+        position: fixed;
+        background-color: white;
+        width: 32%;
+        height: 100%;
+        right: 0;
+        top: 0;
+        border: 1px solid #f2f2f2;
+        box-shadow: 0px 1px 4px rgb(0 0 0 / 5%);
+    }
+    .lista-tit-part {
+        position: fixed;
+        background-color: white;
+        width: 100%;
+        height: 10%;
+        border-bottom: 1px solid #f2f2f2;
+        box-shadow: 0px 1px 4px rgb(0 0 0 / 5%);
+    }
+    .tit-lista {
+        position: fixed;
+    }
+    .lista-todos {
+        position: absolute;
+        width: 86%;
+        height: 100%;
+        margin-top: 15%;
+        left: 12%;
+    }
+    .lista-item {
+        position: absolute;
+        width: 86%;
+        height: 20%;
+        text-align: justify;
+        left: 5%;
+        list-style-type: none;
+    }
+    .lista-item-nome-x {
+        font-size: 18px;
+    }
+    .lista-item-nome {
+        font-size: 20px;
+        color: #3f3e3e;
+    }
+    .lista-item-preco {
+        font-weight: 600;
+        margin-left: 8%;
+    }
+    .tit-nt {
+        position: absolute;
+        margin-top: 40%;
+        left: 0;
+        right: 0;
+        text-align: center;
+    }
+    .lista {
+        overflow-y: auto;
+    }
+    .btn-danger {
+        width: 20%;
+        height: 20%;
+        font-size: 15px;
+        text-align: center;
+    }
+    .produtos {
+        display: inline-block;
+        margin-left: 2%;
+        margin-bottom: 38%;
+        margin-top: 3%;
+    }
+    .cx{
+        position: absolute;
+        border: 1px solid #f2f2f2;
+        box-shadow: 0px 1px 4px rgb(0 0 0 / 5%);
+        width: 9.5%;
+        margin-right: 33%;
+        height: 32%;
+        border-radius: 1%/4%;
+    }
+    .mais {
+        position: absolute;
+        margin-top: 33%;
+        margin-left: 26%;
+    }
+    .desc-geral-food {
+        position: absolute;
+        margin-top: 65%;
+        margin-left: 0.5%;
+        width: 100%;
+        height: 100%;
+    }
+    .preco-food{
+        position: absolute;
+        font-size: 1.125rem;
+        color: #3e3e3e;
+        font-weight: bold;
+    }
+    .desc-food{
+        position: absolute;
+        color: #3e3e3e;
+        margin-top: 18%;
+        font-size: 1rem;
+        width: 100%;
+    }
+    .peso-food {
+        position: absolute;
+        margin-top: 55%;
+        color: #717171;
+        font-size: 0.875rem;
+    }
+    .menu-item-p {
+        position: absolute;
+        height: 15%;
+        top: 45%;
+        width: 100%;
+    }
+    .bt-menos-menu-item-p {
+        position: absolute;
+        width: 90%;
+    }
+    .bt-menos-menu-item-p-a {
+        position: absolute;
+        margin-bottom: 100%;
+        background-color: #0974FF;
+        border-radius: 5px;
+        width: 25%;
+        border: none;
+    }
+    .bt-mais-menu-item-p {
+        position: absolute;
+        width: 90%;
+        margin-left: 18%;
+    }
+    .bt-mais-menu-item-p-a {
+        position: absolute;
+        margin-bottom: 100%;
+        background-color: #0974FF;
+        border-radius: 5px;
+        width: 25%;
+        border: none;
+    }
+    .bt-adicionar-menu-item-p {
+        position: absolute;
+        margin-left: 35%;
+        border: none;
+        background-color: #0974FF;
+        width: 65%;
+        border-radius: 5px;
+        height: 75%;
+        color: white;
+    }
+</style>
+
+<div id="cont">
+{{#if produtos}}
+    <header>
+        <h1 class="tit">Todos Os Nossos Produtos</h1>
+        <form method="POST" action="/veri-edit-exclu" id="form_dele"> 
+            <button type="submit" class="loca">
+                <svg xmlns="http://www.w3.org/2000/svg" width="50" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+                    <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
+                </svg>
+            </button>
+        </form>
+    </header>
+    <!--<section>
+        
+        {{#each produtos}}
+            {{#if this.l}}
+                <input type="hidden" value="{{this.id}}" class="id"/>
+                <a href="produtos?prato={{this.id}}" class="link-food">
+                    <div class="cx-right cx" style="margin-top: {{this.m}}px;">
+                        <span class="tit-food {{this.id}}">{{this.nome}}</span>
+                        <span class="desc-food {{this.id}}">{{this.desc}}</span>
+                        <span class="preco-food {{this.id}}">{{this.preco}}</span>
+                        <img src={{this.img}} alt={{this.desc}} class="img-food {{this.id}}"/>
+                    </div>
+                </a>
+            {{else}}
+                <input type="hidden" value="{{this.id}}" class="id"/>
+                <a href="produtos?prato={{this.id}}" class="link-food">
+                    <div class="cx-left cx" style="margin-top: {{this.m}}px;">
+                        <span class="tit-food {{this.id}}">{{this.nome}}</span>
+                        <span class="desc-food {{this.id}}">{{this.desc}}</span>
+                        <span class="preco-food {{this.id}}">{{this.preco}}</span>
+                        <img src={{this.img}} alt={{this.desc}} class="img-food {{this.id}}"/>
+                    </div>
+                </a>
+            {{/if}}
+        {{/each}}
+    </section>-->
+    <section class="produtos">
+        {{#each produtos}}
+            <div class="cx" style="margin-top: {{this.pular}}%;margin-left: {{this.m}}%;">
+                <img src="{{this.img}}" alt="{{this.desc}}" class="img-food">
+                <div class="desc-geral-food">
+                    <span class="preco-food">{{this.preco}}</span>
+                    <span class="desc-food">{{this.desc}}</span>
+                    <span class="peso-food">{{this.peso}}</span>
+                    <nav class="menu-item-p">
+                        <div class="bt-menos-menu-item-p">
+                            <button class="bt-menos-menu-item-p-a" onclick="clicou_menos('{{this.id}}')">
+                                <img src="img/dash.svg" alt="dash.svg" width="100%" class="bt-menos-menu-item-p-img">
+                            </button>
+                        </div>
+                        <div class="bt-mais-menu-item-p">
+                            <button class="bt-mais-menu-item-p-a" onclick="clicou_mais('{{this.id}}')">
+                                <img src="img/plus.svg" alt="plus.svg" width="100%" class="bt-mais-mais-item-p-img">
+                            </button>
+                        </div>
+                        <form action="/veri-cadas-lis?preco={{this.preco}}" method="POST" id="form-cadas-list" class="form-cadas-list">
+                            <input type="hidden" value="{{this.id}}" name="id" id="id">
+                            <input type="hidden" name="comem" id="comem">
+                            <input type="hidden" name="quant_preco" class="quant_preco" id="quant_preco" value="0">
+                            <button class="bt-adicionar-menu-item-p" id="bt-add-{{this.id}}" type="submit">
+                                Adicionar 0
+                            </button>
+                        </form>
+                    </nav>
+                </div>
+            </div>
+            {{#if this.ultimo}}
+                <a href="" class="mais">Ver Todos Os Produtos>></a>
+            {{else}}
+                
+            {{/if}}
+        {{else}}
+        
+        {{/each}}
+        <script>
+            var quant = window.document.getElementsByClassName('quant_preco')
+            const form = window.document.getElementsByClassName('form-cadas-list')
+            for (var cont = 0;cont < form.length;cont++) {
+                form[cont].addEventListener('submit', (event) => {
+                    console.log(quant[cont].value)
+                    if (Number(quant[cont].value) === 0) {
+                        event.preventDefault()
+                    } else {
+                        console.log('asd')
+                    }
+                })
+            }
+        </script>
+        <script>
+            function clicou_menos(id) {
+                var bt_add = window.document.getElementById('bt-add-'+id)
+                var bt_add_text = Number(bt_add.innerText.replace('Adicionar ', ''))
+                if (bt_add_text !== 0) {
+                    bt_add.innerText = `Adicionar ${bt_add_text-1}`
+                    var quant_preco = window.document.getElementsByClassName('quant_preco')
+                    for (var cont = 0;cont < quant_preco.length;cont++) {
+                        quant_preco[cont].value =- 1
+                    }
+                }
+            }
+            function clicou_mais(id) {
+                var bt_add = window.document.getElementById('bt-add-'+id)
+                var bt_add_text = Number(bt_add.innerText.replace('Adicionar ', ''))
+                bt_add.innerText = `Adicionar ${bt_add_text+1}`
+                var quant_preco = window.document.getElementsByClassName('quant_preco')
+                for (var cont = 0;cont < quant_preco.length;cont++) {
+                    quant_preco[cont].value =+ 1
+                }
+            }
+        </script>
+        <script>
+            var desc_food = window.document.getElementsByClassName('desc-food')
+            for (var cont = 0;cont <= desc_food.length;cont++) {
+                var nome = desc_food[cont].innerText
+                var nome_1 = ''
+                if (nome.length > 38) {
+                    for (var cont2 = 0;cont2 < 35;cont2++) {
+                        nome_1 += nome[cont2]
+                    }
+                    nome_1 = nome_1+'...'
+                    desc_food[cont].innerText = nome_1
+                }
+            }
+        </script>
+        <script>
+            var desc_food = window.document.getElementsByClassName('peso-food')
+            for (var cont = 0;cont <= desc_food.length;cont++) {
+                var nome = desc_food[cont].innerText
+                var nome_1 = ''
+                if (nome.length > 41) {
+                    for (var cont2 = 0;cont2 < 38;cont2++) {
+                        nome_1 += nome[cont2]
+                    }
+                    nome_1 = nome_1+'...'
+                    desc_food[cont].innerText = nome_1
+                }
+            }
+        </script>
+    </section>
+    <section class="lista">
+        <main>
+            {{#if lista}}
+                <ul class="lista-todos"></ul>
+                    {{#each lista}}
+                        <li class="lista-item" style="margin-top: {{this.m}}%;">
+                            <span class="lista-item-nome">
+                                {{this.item.quant}}<span class="lista-item-nome-x">x</span> 
+                                {{#if this.nome}}
+                                    {{this.nome}}
+                                {{else}}
+                                    {{this.item.nome}}
+                                {{/if}}
+                            </span>
+                            <span class="lista-item-preco">
+                                {{this.item.preco}}
+                            </span>
+                            <br>
+                            <form action="/veri-exclu-lis" method="post">
+                                <input type="hidden" value="{{this.item.id2}}" id="id2" name="id2"/>
+                                <button type="submit" class="btn btn-danger">Excluir</button>
+                            </form>
+                        </li>
+                    {{else}}
+                        
+                    {{/each}}
+                </ul>
+            {{else}}
+                <h4 class="tit-nt">Ainda Não Há Produtos Na Lista :(</h4>
+            {{/if}}
+        </main>
+        <header class="lista-tit-part">
+            {{#if lista}}
+                <h4 class="tit-lista">Produtos Na Lista: </h4>
+            {{else}}
+
+            {{/if}}
+        </header>
+    </section>
+    </div>
+</div>
+    <!--<script>
+        var id = String(location.search.slice(1)).split('prato=')[1]
+        if (id) {
+            var form_comem = window.document.getElementById('form_comem')
+            form_comem.method = 'POST'
+            form_comem.action = '/veri-cadas-lis?preco='+window.document.getElementById('div_txt_2').innerText
+            var res = window.document.getElementById('res')
+            var mais_link = window.document.getElementById('mais_link')
+            var menos_link = window.document.getElementById('menos_link')
+            mais_link.addEventListener("click", (ev) => {
+                var div_txt_2 = window.document.getElementById('div_txt_2')
+                var precos_brutos = window.document.getElementsByClassName('preco-food')
+                var preco = ''
+                for (var cont = 0;cont < precos_brutos.length;cont++) {
+                    if (precos_brutos[cont].className.split(' ')[1] === id) {
+                        preco = String(precos_brutos[cont].innerText)
+                    }
+                }
+                preco = Number(preco.replace('R$', '').replace(',', '.'))
+                div_txt_2.innerText = 'R$'+String(parseFloat(String(preco * Number(res.innerText))).toFixed(2)).replace('.', ',')
+                form_comem.action = '/veri-cadas-lis?preco='+'R$'+String(parseFloat(String(preco * Number(res.innerText))).toFixed(2)).replace('.', ',')
+            })
+            menos_link.addEventListener("click", (en) => {
+                var div_txt_2 = window.document.getElementById('div_txt_2')
+                var precos_brutos = window.document.getElementsByClassName('preco-food')
+                var preco = ''
+                for (var cont = 0;cont < precos_brutos.length;cont++) {
+                    if (precos_brutos[cont].className.split(' ')[1] === id) {
+                        preco = String(precos_brutos[cont].innerText)
+                    }
+                }
+                preco = Number(preco.replace('R$', '').replace(',', '.'))
+                div_txt_2.innerText = 'R$'+String(parseFloat(String(preco * Number(res.innerText))).toFixed(2)).replace('.', ',')
+                form_comem.action = '/veri-cadas-lis?preco='+'R$'+String(parseFloat(String(preco * Number(res.innerText))).toFixed(2)).replace('.', ',')
+            })
+        }
+    </scrip>-->
+{{else}}
+    <h1 class="tit-nem">Ainda Não Há Produtos Cadastratros :(</h1>
+{{/if}}

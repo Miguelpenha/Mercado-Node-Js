@@ -1,0 +1,30 @@
+<style>
+    #cep{
+        position: absolute;
+        margin-top: 1%;
+        margin-left: 0.3%;
+    }
+    #enviar{
+        position: absolute;
+        margin-top: 1%;
+        margin-left: 13.3%;
+    }
+    #nsc{
+        position: absolute;
+        margin-top: 3%;
+        margin-left: 0.3%;
+    }
+</style>
+{{#if erro}}
+    <div class="alert alert-danger" role="alert" id="erro">{{erro}}</div>
+{{else}}
+
+{{/if}}
+<form method="POST" action="/veri?cep=true" id="form">
+    <input type="text" id="cep" name="cep" placeholder="Digite seu CEP">
+    <input type="submit" value="Enviar" id="enviar"/>
+</form>
+<a href="" target="_blank" rel="external" id="nsc">
+    Não Sabe o CEP?
+</a>
+

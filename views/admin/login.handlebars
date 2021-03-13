@@ -1,0 +1,20 @@
+<style>
+    .req{
+        color: #d93025;
+    }
+    #form {
+        position: absolute;
+        margin-left: 1%;
+        margin-top: 1%;
+    }
+    #bt {
+        margin-top: 3%;
+    }
+</style>
+<form method="POST" action="/admin/veri-login" id="form">
+    Login De Acesso: <span class="req">*</span><br><input type="text" name="login" id="login" autocomplete="username">
+    <br>
+    Senha De Acesso: <span class="req">*</span><br><input type="password" name="senha" id="senha" autocomplete="current-password">
+    <br>
+    <input type="submit" value="Enviar" id="bt"/>
+</form>

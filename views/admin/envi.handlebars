@@ -1,0 +1,46 @@
+<style>
+    .req{
+        color: #d93025;
+    }
+</style>
+{{#if edit}}
+    <form method="POST" enctype="multipart/form-data" action="/veri-produto?edit=true">
+        <input type="hidden" value="false" name="api" id="api"/>
+        <input type="hidden" name="fileName_Img" id="fileName_Img" {{fileName_Img}}>
+        <input type="hidden" name="nomeOrigin" id="nomeOrigin" value="{{nomeOrigin}}">
+        <input type="hidden" name="senha" id="senha" value="{{senha}}">
+        Nome: <span class="req">*</span><br><input type="text" required id="nome" name="nome" value="{{nome}}"/>
+        <br>
+        Categoria: <span class="req">*</span><br><input type="text" required id="categoria" name="categoria" value="{{categoria}}"/>
+        <br>
+        Peso: <span class="req">*</span><br><input type="text" required id="peso" name="peso" value="{{peso}}"/>
+        <br>
+        Marca: <span class="req">*</span><br><input type="text" required id="marca" name="marca" value="{{marca}}"/>
+        <br>
+        Preço: <span class="req">*</span><br><input type="text" required id="preco" name="preco" value="{{preco}}"/>
+        <br>
+        Descrição Do Produto: <span class="req">*</span><br><textarea required id="desc" name="desc">{{desc}}</textarea>
+        <br>
+        Foto Do Produto: <br><input type="file" name="file" id="file">
+        <input type="submit" value="Enviar"/>
+    </form>
+{{else}}
+    <form method="POST" enctype="multipart/form-data" action="/veri-produto">
+        <input type="hidden" value="false" name="api" id="api"/>
+        <input type="hidden" name="senha" id="senha" value="{{senha}}">
+        Nome: <span class="req">*</span><br><input type="text" required id="nome" name="nome"/>
+        <br>
+        Categoria: <span class="req">*</span><br><input type="text" required id="categoria" name="categoria"/>
+        <br>
+        Peso: <span class="req">*</span><br><input type="text" required id="peso" name="peso"/>
+        <br>
+        Marca: <span class="req">*</span><br><input type="text" required id="marca" name="marca"/>
+        <br>
+        Preço: <span class="req">*</span><br><input type="text" required id="preco" name="preco"/>
+        <br>
+        Descrição Do Produto: <span class="req">*</span><br><textarea required id="desc" name="desc"></textarea>
+        <br>
+        Foto Do Produto: <br><input type="file" name="file" id="file">
+        <input type="submit" value="Enviar"/>
+    </form>
+{{/if}}

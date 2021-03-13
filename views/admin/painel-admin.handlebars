@@ -1,0 +1,110 @@
+<style>
+    .tit {
+        text-align: center;
+        margin-top: 1%;
+    }
+    .cx {
+        position: absolute;
+        width: 30%;
+        border: 2px solid #f2f2f2;
+        box-shadow: 0px 2.5px 10px rgb(0 0 0 / 5%);
+        background-color: white;
+        left: 20%;
+        right: 80%;
+        height: 20%;
+        border-radius: 0.5rem;
+    }
+    .form {
+        position: absolute;
+        margin-left: 1%;
+    }
+    .txt-food {
+        margin-left: 1%;
+    }
+    .produtos {
+        margin-top: 4%;
+    }
+    .bt-exclu-produto {
+        position: absolute;
+        bottom: 4%;
+        left: 1%;
+        height: 27.1%;
+        font-size: 1rem;
+    }
+    .bt-edit-produto {
+        position: absolute;
+        bottom: 4%;
+        left: 33%;
+        height: 27.1%;
+        font-size: 1rem;
+    }
+    .nome-food {
+        font-size: 1.5vw;
+    }
+    .num-food {
+        font-size: 1.3vw;
+    }
+    .tit-nt {
+        position: absolute;
+        left: 35%;
+        right: 65%;
+        border: 2px solid #f2f2f2;
+        box-shadow: 0px 2.5px 10px rgb(0 0 0 / 5%);
+        background-color: white;
+        width: 34%;
+        padding: 1%;
+        border-radius: 5rem;
+    }
+</style>
+<h1 class="tit">Painel Admin</h1>
+
+<form action="/admin/envi" method="get" class="form">
+    <button class="btn btn-success" type="submit">Cadastrar Produto</button>
+</form>
+<br>
+<br>
+<form action="/admin/cls-login" method="get" class="form">
+    <button class="btn btn-danger" type="submit">Excluir Todos Os Produtos</button>
+</form>
+
+<div class="produtos">
+    {{#each produtos}}
+        {{#if this.produto.l}}
+            <div class="cx" style="margin-top: {{this.produto.pular}}%;margin-left: 30.5%;">
+            <div class="txt-food">
+                <h4 class="nome-food">Nome: {{this.produto.nome}}</h4>
+                <h5 class="num-food">Número De Vendas: {{this.produto.vendas}}</h5>
+                <br>
+                <br>
+            </div>
+            <form action="/admin/exclu-produto" method="POST">
+                <input type="hidden" name="id" id="id" value="{{this.produto.id}}">
+                <button type="submit" class="btn btn-danger bt-exclu-produto">Excluir Produto</button>
+            </form>
+            <form action="/admin/edit-produto" method="POST">
+                <input type="hidden" name="id" id="id" value="{{this.produto.id}}">
+                <button type="submit" class="btn btn-primary bt-edit-produto">Editar Produto</button>
+            </form>
+        </div>
+        {{else}}
+            <div class="cx" style="margin-top: {{this.produto.pular}}%;">
+            <div class="txt-food">
+                <h4 class="nome-food">Nome: {{this.produto.nome}}</h4>
+                <h5 class="num-food">Número De Vendas: {{this.produto.vendas}}</h5>
+                <br>
+                <br>
+            </div>
+            <form action="/admin/exclu-produto" method="POST">
+                <input type="hidden" name="id" id="id" value="{{this.produto.id}}">
+                <button type="submit" class="btn btn-danger bt-exclu-produto">Excluir Produto</button>
+            </form>
+            <form action="/admin/edit-produto" method="POST">
+                <input type="hidden" name="id" id="id" value="{{this.produto.id}}">
+                <button type="submit" class="btn btn-primary bt-edit-produto">Editar Produto</button>
+            </form>
+        </div>
+        {{/if}}
+    {{else}}
+        <h3 class="tit-nt">Ainda Não Há Produtos Cadastrados :(</h3>
+    {{/each}}
+</div>
