@@ -16,7 +16,9 @@ const path = require('path')
     admin.get('/envi', (req, res) => {
         if (req.cookies.admin) {
             if (req.query.edit) {
-                res.render('admin/envi', {senha: process.env.SENHA_ADMIN, edit: true})
+                ProdutoModels.findById(req.query.id, (err, result) => {
+                    res.render('admin/envi', {senha: process.env.SENHA_ADMIN, edit: true, nome: result.nome_Produto, categoria: result.categoria, fileName_Img: result.fileName_Img, nomeOrigin: result.nomeOrigin, peso: result.peso, marca: result.marca, preco: result.preco, desc: result.desc, id: result.id})
+                })
             } else {
                 res.render('admin/envi', {senha: process.env.SENHA_ADMIN})
             }
@@ -138,9 +140,6 @@ const path = require('path')
             req.flash('erro_msg', 'Senha Invalída')
             res.redirect('/admin/cls-login')
         }
-    })
-    admin.post('/edit-produto', (req, res) => {
-        
     })
 // Exportando
     module.exports = admin

@@ -34,6 +34,7 @@
             res.locals.erro_msg = req.flash('erro_msg')
             res.locals.sucesso_msg = req.flash('sucesso_msg')
             res.locals.alert_msg = req.flash('alert_msg')
+            res.locals.primario_msg = req.flash('primario_msg')
             next()
         })
     // Body Parser
@@ -111,8 +112,10 @@
         app.post('/veri-produto', multer(multerConfig).single('file'), async(req, res) => {
             if (req.body.senha === process.env.SENHA_ADMIN) {
                 if (req.query.edit) {
+                    console.log(req.query.edit)
                     try {
-                        const produtoEnvi = await ProdutoModels.create({
+                        const produtoEnvi = await ProdutoModels.findByIdAndUpdate({_id: req.body.id},
+                            {
                             nome_Produto: req.body.nome,
                             categoria: req.body.categoria,
                             peso: String(req.body.peso),
@@ -125,25 +128,26 @@
                         if (req.body.api === 'true') {
                             res.json(produtoEnvi)
                         } else {
-                            req.flash('sucesso_msg', 'Produto Cadastrado Com Sucesso')
+                            req.flash('primario_msg', 'Produto Editado Com Sucesso')
                             res.redirect('/admin/painel-admin')
                         }
                     }
                     catch {
-                        const produtoEnvi = await ProdutoModels.create({
+                        const produtoEnvi = await ProdutoModels.findByIdAndUpdate({_id: req.body.id},
+                            {
                             nome_Produto: req.body.nome,
                             categoria: req.body.categoria,
                             peso: String(req.body.peso),
                             marca: req.body.marca,
                             desc: req.body.desc,
-                            fileName_Img: String(req.file.filename).replace(' ', '-').replace(' ', '-'),
-                            nomeOrigin: req.file.originalname,
+                            fileName_Img: req.body.fileName_Img,
+                            nomeOrigin: req.body.originalname,
                             preco: req.body.preco
                         })
                         if (req.body.api === 'true') {
                             res.json(produtoEnvi)
                         } else {
-                            req.flash('sucesso_msg', 'Produto Cadastrado Com Sucesso')
+                            req.flash('primario_msg', 'Produto Editado Com Sucesso')
                             res.redirect('/admin/painel-admin')
                         }
                     }
