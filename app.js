@@ -110,7 +110,7 @@
             }
         })
         app.post('/veri-produto', multer(multerConfig).single('file'), async(req, res) => {
-            if (req.body.senha === process.env.SENHA_ADMIN) {
+            if (req.body.senha === process.env.SENHA_ADMIN && req.body.login === process.env.LOGIN_ADMIN) {
                 if (req.query.edit) {
                     try {
                         const produtoEnvi = await ProdutoModels.findByIdAndUpdate({_id: req.body.id},

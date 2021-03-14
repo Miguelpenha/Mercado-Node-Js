@@ -17,10 +17,10 @@ const path = require('path')
         if (req.cookies.admin) {
             if (req.query.edit) {
                 ProdutoModels.findById(req.query.id, (err, result) => {
-                    res.render('admin/envi', {senha: process.env.SENHA_ADMIN, edit: true, nome: result.nome_Produto, categoria: result.categoria, fileName_Img: result.fileName_Img, nomeOrigin: result.nomeOrigin, peso: result.peso, marca: result.marca, preco: result.preco, desc: result.desc, id: result.id})
+                    res.render('admin/envi', {senha: process.env.SENHA_ADMIN, edit: true, nome: result.nome_Produto, categoria: result.categoria, fileName_Img: result.fileName_Img, nomeOrigin: result.nomeOrigin, peso: result.peso, marca: result.marca, preco: result.preco, desc: result.desc, id: result.id, login: process.env.LOGIN_ADMIN})
                 })
             } else {
-                res.render('admin/envi', {senha: process.env.SENHA_ADMIN})
+                res.render('admin/envi', {senha: process.env.SENHA_ADMIN, login: process.env.LOGIN_ADMIN})
             }
         } else {
             res.status(404).render('404')
@@ -107,30 +107,30 @@ const path = require('path')
         })
     })
     admin.get('/cls-login', (req, res) => {
-        ProdutoModels.find({}, (err, result) => {
-            if (result.length === 0) {
-                req.flash('alert_msg', 'Não Há Produtos Cadastrados Para Deletar')
-                res.redirect('/admin/painel-admin')
-            } else {
-                res.render('admin/cls-login')
-            }
-        })
+        if (req.cookies.admin) {
+            ProdutoModels.find({}, (err, result) => {
+                if (result.length === 0) {
+                    req.flash('alert_msg', 'Não Há Produtos Cadastrados Para Deletar')
+                    res.redirect('/admin/painel-admin')
+                } else {
+                    res.render('admin/cls-login', {login: process.env.LOGIN_ADMIN})
+                }
+            })
+        } else {
+            res.status(404).render('404')
+        }
     })
     admin.post('/cls', (req, res) => {
-        if (req.body.senha === process.env.SENHA_ADMIN) {
+        if (req.body.senha === process.env.SENHA_ADMIN && req.body.login === process.env.LOGIN_ADMIN) {
             ProdutoModels.find({}, (err, result) => {
                 if (err) {
                     console.log(err)
                 } else {
                     result.forEach((i) => {
                         if (i.fileName_Img === 'Padrão.png') {
-                            fs.unlink(path.resolve(__dirname, 'public', 'uploads', i.fileName_Img), (err) => {
-                                if (err) {
-                                    console.log(err)
-                                }
-                            })
+                            
                         } else {
-                            fs.unlink(path.resolve(__dirname, 'public', 'uploads', 'baixados', i.fileName_Img), (err) => {
+                            fs.unlink(path.resolve(__dirname, '..', 'public', 'uploads', 'baixados', i.fileName_Img), (err) => {
                                 if (err) {
                                     console.log(err)
                                 }
@@ -161,8 +161,12 @@ const path = require('path')
                 }
             })
         } else {
-            req.flash('erro_msg', 'Senha Invalída')
-            res.redirect('/admin/cls-login')
+            if (req.body.api === 'true') {
+                res.json('Senha Ou Login Inválidos')
+            } else {
+                req.flash('erro_msg', 'Senha Inválida')
+                res.redirect('/admin/cls-login')
+            }
         }
     })
 // Exportando

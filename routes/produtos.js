@@ -51,7 +51,7 @@ const crypto = require('crypto')
                                 produtos.push({
                                     nome: i.nome_Produto,
                                     desc: i.desc,
-                                    img: `/uploads/${i.fileName_Img}`,
+                                    img: `/uploads/baixados/${i.fileName_Img}`,
                                     preco: i.preco,
                                     id: i.id,
                                     m: m,
@@ -115,7 +115,7 @@ const crypto = require('crypto')
                         produtos.push({
                             nome: i.nome_Produto,
                             desc: i.desc,
-                            img: `/uploads/${i.fileName_Img}`,
+                            img: `/uploads/baixados/${i.fileName_Img}`,
                             preco: i.preco,
                             id: i.id,
                             m: m,
@@ -180,9 +180,9 @@ const crypto = require('crypto')
                         return existe
                     }
                     if (kg(result.peso) === true) {
-                        var peso = `${result.peso}kg`
+                        var peso = `${result.peso}`
                         res.render('produtos', {
-                            img: `/uploads/${result.fileName_Img}`,
+                            img: `/uploads/baixados/${result.fileName_Img}`,
                             categoria: result.categoria,
                             nome: result.nome_Produto,
                             marca: result.marca,
@@ -190,9 +190,9 @@ const crypto = require('crypto')
                             desc: result.desc
                         })
                     } else {
-                        var peso = `${result.peso}g`
+                        var peso = `${result.peso}`
                         res.render('produtos', {
-                            img: `/uploads/${result.fileName_Img}`,
+                            img: `/uploads/baixados/${result.fileName_Img}`,
                             categoria: result.categoria,
                             nome: result.nome_Produto,
                             marca: result.marca,

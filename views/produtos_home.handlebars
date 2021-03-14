@@ -191,9 +191,9 @@
     }
 </style>
 
-<div id="cont">
+<div id="cont" onclick="veri_click_tit()">
 {{#if produtos}}
-    <header>
+    <header id="produtos_tit">
         <h1 class="tit">Todos Os Nossos Produtos</h1>
         <form method="POST" action="/veri-edit-exclu" id="form_dele"> 
             <button type="submit" class="loca">
@@ -229,14 +229,42 @@
             {{/if}}
         {{/each}}
     </section>-->
-    <section class="produtos">
+    <section class="produtos" id="produtos">
         {{#each produtos}}
+            <script>
+                var id = String(location.search.slice(1)).split('prato=')[1]
+                if (id) {
+                    function veri_click_tit() {
+                        window.location.href('http://localhost:3000/produtos')
+                    }
+                    var cont = window.document.getElementById('cont')
+                    var cx_produto = window.document.createElement("div")
+                    cx_produto.id = 'cx_produto'
+                    cx_produto.style.backgroundColor = 'white'
+                    cx_produto.style.position = 'absolute'
+                    cx_produto.style.width = '78%'
+                    cx_produto.style.height = '80%'
+                    cx_produto.style.bottom = '10%'
+                    cx_produto.style.left = '10%'
+                    cx_produto.style.right = '90%'
+                    cx_produto.style.border = '1px solid #f2f2f2'
+                    cx_produto.style.boxShadow = '0px 1px 4px rgb(0 0 0 / 5%)'
+                    cont.style.filter = 'blur(4px)'
+                    cont.style.width = '100%'
+                    window.document.body.style.width = '50.9%'
+                    window.document.body.appendChild(cx_produto)
+                }
+            </script>
             <div class="cx" style="margin-top: {{this.pular}}%;margin-left: {{this.m}}%;">
-                <img src="{{this.img}}" alt="{{this.desc}}" class="img-food">
+                <a href="/produtos?prato={{this.id}}">
+                    <img src="{{this.img}}" alt="{{this.desc}}" class="img-food">
+                </a>
                 <div class="desc-geral-food">
-                    <span class="preco-food">{{this.preco}}</span>
-                    <span class="desc-food">{{this.desc}}</span>
-                    <span class="peso-food">{{this.peso}}</span>
+                    <a href="/produtos?prato={{this.id}}">
+                        <span class="preco-food">{{this.preco}}</span>
+                        <span class="desc-food">{{this.desc}}</span>
+                        <span class="peso-food">{{this.peso}}</span>
+                    </a>
                     <nav class="menu-item-p">
                         <div class="bt-menos-menu-item-p">
                             <button class="bt-menos-menu-item-p-a" onclick="clicou_menos('{{this.id}}')">
@@ -276,7 +304,7 @@
                     if (Number(quant[cont].value) === 0) {
                         event.preventDefault()
                     } else {
-                        console.log('asd')
+                        
                     }
                 })
             }

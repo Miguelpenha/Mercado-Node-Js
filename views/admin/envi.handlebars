@@ -7,6 +7,7 @@
     <form method="POST" enctype="multipart/form-data" action="/veri-produto?edit=true">
         <input type="hidden" name="id" id="id" value="{{id}}">
         <input type="hidden" value="false" name="api" id="api"/>
+        <input type="hidden" name="login" id="login" value="{{login}}">
         <input type="hidden" name="fileName_Img" id="fileName_Img" {{fileName_Img}}>
         <input type="hidden" name="originalname" id="originalname" value="{{nomeOrigin}}">
         <input type="hidden" name="senha" id="senha" value="{{senha}}">
@@ -28,6 +29,7 @@
 {{else}}
     <form method="POST" enctype="multipart/form-data" action="/veri-produto">
         <input type="hidden" value="false" name="api" id="api"/>
+        <input type="hidden" name="login" id="login" value="{{login}}">
         <input type="hidden" name="senha" id="senha" value="{{senha}}">
         Nome: <span class="req">*</span><br><input type="text" required id="nome" name="nome"/>
         <br>
