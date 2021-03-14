@@ -143,12 +143,20 @@ const path = require('path')
                 if (err) {
                     console.log(err)
                 } else {
-                    if (result.deletedCount === 0) {
-                        req.flash('alert_msg', 'Não Há Produtos Cadastrados Para Deletar')
-                        res.redirect('/admin/painel-admin')
+                    if (req.body.api === 'true') {
+                        if (result.deletedCount === 0) {
+                            req.json('alert_msg', 'Não Há Produtos Cadastrados Para Deletar')
+                        } else {
+                            req.json('sucesso_msg', `${result.deletedCount} Produtos Foram Deletados com Sucesso`)
+                        }
                     } else {
-                        req.flash('sucesso_msg', `${result.deletedCount} Produtos Foram Deletados com Sucesso`)
-                        res.redirect('/admin/painel-admin')
+                        if (result.deletedCount === 0) {
+                            req.flash('alert_msg', 'Não Há Produtos Cadastrados Para Deletar')
+                            res.redirect('/admin/painel-admin')
+                        } else {
+                            req.flash('sucesso_msg', `${result.deletedCount} Produtos Foram Deletados com Sucesso`)
+                            res.redirect('/admin/painel-admin')
+                        }
                     }
                 }
             })
