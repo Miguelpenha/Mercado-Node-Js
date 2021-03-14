@@ -196,32 +196,6 @@
                 }
             }
         })
-        app.delete('/cls', (req, res) => {
-            ProdutoModels.find({}, (err, result) => {
-                if (err) {
-                    console.log(err)
-                } else {
-                    result.forEach((i) => {
-                        fs.unlink(path.resolve(__dirname, 'public', 'uploads', i.fileName_Img), (err) => {
-                            if (err) {
-                                console.log(err)
-                            }
-                        })
-                    })
-                }
-            })
-            ProdutoModels.deleteMany({}, (err, result) => {
-                if (err) {
-                    console.log(err)
-                } else {
-                    if (result.deletedCount === 0) {
-                        res.json('Não Há Produtos Cadastrados Para Deletar')
-                    } else {
-                        res.json({"deletados": result.deletedCount})
-                    }
-                }
-            })
-        })
         app.post('/edit-veri', (req, res) => {
             const Localizacao = {
                 Estado: req.body.estado,

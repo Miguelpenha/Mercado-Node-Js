@@ -84,11 +84,19 @@ const path = require('path')
     admin.post('/exclu-produto', (req, res) => {
         ProdutoModels.findById(req.body.id, (err, result) => {
             try {
-                fs.unlink(path.resolve(__dirname, '..' ,'public', 'uploads', result.fileName_Img), (err) => {
-                    if (err) {
-                        console.log(err)
-                    }
-                })
+                if (result.fileName_Img === 'Padrão.png') {
+                    fs.unlink(path.resolve(__dirname, '..' ,'public', 'uploads', result.fileName_Img), (err) => {
+                        if (err) {
+                            console.log(err)
+                        }
+                    })
+                } else {
+                    fs.unlink(path.resolve(__dirname, '..' ,'public', 'uploads', 'baixados', result.fileName_Img), (err) => {
+                        if (err) {
+                            console.log(err)
+                        }
+                    })
+                }
             } catch {
                 
             }
@@ -115,11 +123,19 @@ const path = require('path')
                     console.log(err)
                 } else {
                     result.forEach((i) => {
-                        fs.unlink(path.resolve(__dirname, 'public', 'uploads', i.fileName_Img), (err) => {
-                            if (err) {
-                                console.log(err)
-                            }
-                        })
+                        if (i.fileName_Img === 'Padrão.png') {
+                            fs.unlink(path.resolve(__dirname, 'public', 'uploads', i.fileName_Img), (err) => {
+                                if (err) {
+                                    console.log(err)
+                                }
+                            })
+                        } else {
+                            fs.unlink(path.resolve(__dirname, 'public', 'uploads', 'baixados', i.fileName_Img), (err) => {
+                                if (err) {
+                                    console.log(err)
+                                }
+                            })
+                        }
                     })
                 }
             })
