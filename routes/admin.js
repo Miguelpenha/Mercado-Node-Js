@@ -145,9 +145,9 @@ const path = require('path')
                 } else {
                     if (req.body.api === 'true') {
                         if (result.deletedCount === 0) {
-                            req.json('alert_msg', 'Não Há Produtos Cadastrados Para Deletar')
+                            res.json('Não Há Produtos Cadastrados Para Deletar')
                         } else {
-                            req.json('sucesso_msg', `${result.deletedCount} Produtos Foram Deletados com Sucesso`)
+                            res.json({produtosExcluidos: result.deletedCount})
                         }
                     } else {
                         if (result.deletedCount === 0) {
