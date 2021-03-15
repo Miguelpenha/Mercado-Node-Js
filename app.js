@@ -228,26 +228,52 @@
                         console.log(err)
                     }
                     const id2 = `${hash.toString('hex')}${req.body.id}`
-                    const envi = [
-                        req.body.id={
-                            id: req.body.id,
-                            preco: req.query.preco,
-                            comem: req.body.comem,
-                            nome: result.nome_Produto,
-                            quant: req.body.quant_preco,
-                            marca: result.marca,
-                            desc: result.desc,
-                            id2: id2
+                    var quant = req.query.quant
+                    if (quant == 0) {
+                        quant = 1
+                        const envi = [
+                            req.body.id={
+                                id: req.body.id,
+                                preco: req.query.preco,
+                                comem: req.body.comem,
+                                nome: result.nome_Produto,
+                                quant: quant,
+                                marca: result.marca,
+                                desc: result.desc,
+                                id2: id2
+                            }
+                        ]
+                        if (req.cookies.lista) {
+                            const envi2 = req.cookies.lista
+                            envi2.forEach((i) => {
+                                envi.push(i)
+                            })
                         }
-                    ]
-                    if (req.cookies.lista) {
-                        const envi2 = req.cookies.lista
-                        envi2.forEach((i) => {
-                            envi.push(i)
-                        })
+                        res.cookie('lista', envi)
+                        res.redirect('/produtos')
+                    } else {
+                        const envi = [
+                            req.body.id={
+                                id: req.body.id,
+                                preco: req.query.preco,
+                                comem: req.body.comem,
+                                nome: result.nome_Produto,
+                                quant: quant,
+                                marca: result.marca,
+                                desc: result.desc,
+                                id2: id2
+                            }
+                        ]
+                        if (req.cookies.lista) {
+                            const envi2 = req.cookies.lista
+                            envi2.forEach((i) => {
+                                envi.push(i)
+                            })
+                        }
+                        res.cookie('lista', envi)
+                        res.redirect('/produtos')
                     }
-                    res.cookie('lista', envi)
-                    res.redirect('/produtos')
+                    
                 })
                 
             })

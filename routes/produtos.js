@@ -207,5 +207,15 @@ const crypto = require('crypto')
         }
         
     })
+    produtos.post('/pedir', (req, res) => {
+        req.cookies.lista.forEach((i) => {
+            console.log({
+                nome: i.nome,
+                preco: i.preco,
+                comem: i.comem
+            })
+            res.redirect(`https://api.whatsapp.com/send?phone=558183705775&amp;text=Nome%20Do%20Produto:%20${i.nome}\nPreço:%20%${i.preco}\nComentário:%20${i.comem}`)
+        })
+    })
 // Exportando
     module.exports = produtos

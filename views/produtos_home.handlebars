@@ -196,31 +196,34 @@
         bottom: 0%;
         height: 6%;
     }
+    #bt-pedido {
+        width: 35%;
+    }
 </style>
 <script>
-                var id = String(location.search.slice(1)).split('prato=')[1]
-                if (id) {
-                    function veri_click_tit() {
-                        window.location.href('http://localhost:3000/produtos')
-                    }
-                    var cont = window.document.getElementById('cont')
-                    var cx_produto = window.document.createElement("div")
-                    cx_produto.id = 'cx_produto'
-                    cx_produto.style.backgroundColor = 'white'
-                    cx_produto.style.position = 'absolute'
-                    cx_produto.style.width = '78%'
-                    cx_produto.style.height = '80%'
-                    cx_produto.style.bottom = '10%'
-                    cx_produto.style.left = '10%'
-                    cx_produto.style.right = '90%'
-                    cx_produto.style.border = '1px solid #f2f2f2'
-                    cx_produto.style.boxShadow = '0px 1px 4px rgb(0 0 0 / 5%)'
-                    cont.style.filter = 'blur(4px)'
-                    cont.style.width = '100%'
-                    window.document.body.style.width = '50.9%'
-                    window.document.body.appendChild(cx_produto)
-                }
-            </script>
+    var id = String(location.search.slice(1)).split('prato=')[1]
+    if (id) {
+        function veri_click_tit() {
+            window.location.href('http://localhost:3000/produtos')
+        }
+        var cont = window.document.getElementById('cont')
+        var cx_produto = window.document.createElement("div")
+        cx_produto.id = 'cx_produto'
+        cx_produto.style.backgroundColor = 'white'
+        cx_produto.style.position = 'absolute'
+        cx_produto.style.width = '78%'
+        cx_produto.style.height = '80%'
+        cx_produto.style.bottom = '10%'
+        cx_produto.style.left = '10%'
+        cx_produto.style.right = '90%'
+        cx_produto.style.border = '1px solid #f2f2f2'
+        cx_produto.style.boxShadow = '0px 1px 4px rgb(0 0 0 / 5%)'
+        cont.style.filter = 'blur(4px)'
+        cont.style.width = '100%'
+        window.document.body.style.width = '50.9%'
+        window.document.body.appendChild(cx_produto)
+    }
+</script>
 <div id="cont" onclick="veri_click_tit()">
     
 {{#if produtos}}
@@ -283,7 +286,7 @@
                                 <img src="img/plus.svg" alt="plus.svg" width="100%" class="bt-mais-mais-item-p-img">
                             </button>
                         </div>
-                        <form action="/veri-cadas-lis?preco=R$1,99" method="POST" id="form-cadas-list" class="form-cadas-list">
+                        <form action="/veri-cadas-lis?preco=R$1,99&quant=0" method="POST" id="form-cadas-list-{{this.id}}" class="form-cadas-list">
                             <input type="hidden" value="{{this.id}}" name="id" id="id">
                             <input type="hidden" name="comem" id="comem">
                             <input type="hidden" name="quant_preco" class="quant_preco" id="quant_preco-{{this.id}}" value="0">
@@ -314,13 +317,24 @@
             function clicou_menos(id) {
                 var quant_preco = window.document.getElementById('quant_preco-'+id)
                 var bt_add = window.document.getElementById('bt-add-'+id)
-                if (quant_preco.value != 0) {
+                if (quant_preco.value == 1) {
+                    var bt_add_text = Number(bt_add.innerText.replace('Adicionar ', ''))
+                    var bt_add = window.document.getElementById('bt-add-'+id)
+                    bt_add.innerText = `Adicionar`
+                    quant_preco.value = Number(quant_preco.value) - 1
+                    var form = window.document.getElementById('form-cadas-list-'+id)
+                    form.action = String(form.action).replace(String(String(form.action).split('&')[1]), '')+'quant='+String(Number(String(String(form.action).split('&')[1]).replace('quant=', ''))-1)
+                    console.log(form.action)
+                } else if (quant_preco.value != 0) {
                     var bt_add_text = Number(bt_add.innerText.replace('Adicionar ', ''))
                     var bt_add = window.document.getElementById('bt-add-'+id)
                     bt_add.innerText = `Adicionar ${bt_add_text-1}`
                     quant_preco.value = Number(quant_preco.value) - 1
+                    var form = window.document.getElementById('form-cadas-list-'+id)
+                    form.action = String(form.action).replace(String(String(form.action).split('&')[1]), '')+'quant='+String(Number(String(String(form.action).split('&')[1]).replace('quant=', ''))-1)
+                    console.log(form.action)
                 } else {
-                    console.log('sd')
+                    
                 }
                 
             }
@@ -336,6 +350,9 @@
                     var quant_preco = window.document.getElementById('quant_preco-'+id)
                     quant_preco.value = Number(quant_preco.value) + 1
                 }
+                var form = window.document.getElementById('form-cadas-list-'+id)
+                form.action = String(form.action).replace(String(String(form.action).split('&')[1]), '')+'quant='+String(Number(String(String(form.action).split('&')[1]).replace('quant=', ''))+1)
+                console.log(form.action)
             }
         </script>
         <script>
@@ -416,8 +433,8 @@
         </header>
         <footer class="pt-baixo">
             {{#if lista}}
-                <form action="" method="post">
-                    <button type="submit">Fazer Pedido</button>
+                <form action="produtos/pedir" method="post">
+                    <button type="submit" id="bt-pedido">Fazer Pedido</button>
                 </form>
             {{else}}
 
