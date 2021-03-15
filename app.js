@@ -247,7 +247,6 @@
                         })
                     }
                     res.cookie('lista', envi)
-                    req.flash('sucesso_msg', 'Produto Adicionado a Lista Com Sucesso')
                     res.redirect('/produtos')
                 })
                 

@@ -189,9 +189,40 @@
         height: 75%;
         color: white;
     }
+    .pt-baixo {
+        position: fixed;
+        background-color: black;
+        width: 100%;
+        bottom: 0%;
+        height: 6%;
+    }
 </style>
-
+<script>
+                var id = String(location.search.slice(1)).split('prato=')[1]
+                if (id) {
+                    function veri_click_tit() {
+                        window.location.href('http://localhost:3000/produtos')
+                    }
+                    var cont = window.document.getElementById('cont')
+                    var cx_produto = window.document.createElement("div")
+                    cx_produto.id = 'cx_produto'
+                    cx_produto.style.backgroundColor = 'white'
+                    cx_produto.style.position = 'absolute'
+                    cx_produto.style.width = '78%'
+                    cx_produto.style.height = '80%'
+                    cx_produto.style.bottom = '10%'
+                    cx_produto.style.left = '10%'
+                    cx_produto.style.right = '90%'
+                    cx_produto.style.border = '1px solid #f2f2f2'
+                    cx_produto.style.boxShadow = '0px 1px 4px rgb(0 0 0 / 5%)'
+                    cont.style.filter = 'blur(4px)'
+                    cont.style.width = '100%'
+                    window.document.body.style.width = '50.9%'
+                    window.document.body.appendChild(cx_produto)
+                }
+            </script>
 <div id="cont" onclick="veri_click_tit()">
+    
 {{#if produtos}}
     <header id="produtos_tit">
         <h1 class="tit">Todos Os Nossos Produtos</h1>
@@ -231,30 +262,6 @@
     </section>-->
     <section class="produtos" id="produtos">
         {{#each produtos}}
-            <script>
-                var id = String(location.search.slice(1)).split('prato=')[1]
-                if (id) {
-                    function veri_click_tit() {
-                        window.location.href('http://localhost:3000/produtos')
-                    }
-                    var cont = window.document.getElementById('cont')
-                    var cx_produto = window.document.createElement("div")
-                    cx_produto.id = 'cx_produto'
-                    cx_produto.style.backgroundColor = 'white'
-                    cx_produto.style.position = 'absolute'
-                    cx_produto.style.width = '78%'
-                    cx_produto.style.height = '80%'
-                    cx_produto.style.bottom = '10%'
-                    cx_produto.style.left = '10%'
-                    cx_produto.style.right = '90%'
-                    cx_produto.style.border = '1px solid #f2f2f2'
-                    cx_produto.style.boxShadow = '0px 1px 4px rgb(0 0 0 / 5%)'
-                    cont.style.filter = 'blur(4px)'
-                    cont.style.width = '100%'
-                    window.document.body.style.width = '50.9%'
-                    window.document.body.appendChild(cx_produto)
-                }
-            </script>
             <div class="cx" style="margin-top: {{this.pular}}%;margin-left: {{this.m}}%;">
                 <a href="/produtos?prato={{this.id}}">
                     <img src="{{this.img}}" alt="{{this.desc}}" class="img-food">
@@ -276,12 +283,12 @@
                                 <img src="img/plus.svg" alt="plus.svg" width="100%" class="bt-mais-mais-item-p-img">
                             </button>
                         </div>
-                        <form action="/veri-cadas-lis?preco={{this.preco}}" method="POST" id="form-cadas-list" class="form-cadas-list">
+                        <form action="/veri-cadas-lis?preco=R$1,99" method="POST" id="form-cadas-list" class="form-cadas-list">
                             <input type="hidden" value="{{this.id}}" name="id" id="id">
                             <input type="hidden" name="comem" id="comem">
-                            <input type="hidden" name="quant_preco" class="quant_preco" id="quant_preco" value="0">
+                            <input type="hidden" name="quant_preco" class="quant_preco" id="quant_preco-{{this.id}}" value="0">
                             <button class="bt-adicionar-menu-item-p" id="bt-add-{{this.id}}" type="submit">
-                                Adicionar 0
+                                Adicionar 
                             </button>
                         </form>
                     </nav>
@@ -296,45 +303,49 @@
         
         {{/each}}
         <script>
-            var quant = window.document.getElementsByClassName('quant_preco')
-            const form = window.document.getElementsByClassName('form-cadas-list')
+            var form = window.document.getElementsByClassName('form-cadas-list')
             for (var cont = 0;cont < form.length;cont++) {
                 form[cont].addEventListener('submit', (event) => {
-                    console.log(quant[cont].value)
-                    if (Number(quant[cont].value) === 0) {
-                        event.preventDefault()
-                    } else {
-                        
-                    }
-                })
+                    
+                });
             }
         </script>
         <script>
             function clicou_menos(id) {
+                var quant_preco = window.document.getElementById('quant_preco-'+id)
                 var bt_add = window.document.getElementById('bt-add-'+id)
-                var bt_add_text = Number(bt_add.innerText.replace('Adicionar ', ''))
-                if (bt_add_text !== 0) {
+                if (quant_preco.value != 0) {
+                    var bt_add_text = Number(bt_add.innerText.replace('Adicionar ', ''))
+                    var bt_add = window.document.getElementById('bt-add-'+id)
                     bt_add.innerText = `Adicionar ${bt_add_text-1}`
-                    var quant_preco = window.document.getElementsByClassName('quant_preco')
-                    for (var cont = 0;cont < quant_preco.length;cont++) {
-                        quant_preco[cont].value =- 1
-                    }
+                    quant_preco.value = Number(quant_preco.value) - 1
+                } else {
+                    console.log('sd')
                 }
+                
             }
             function clicou_mais(id) {
                 var bt_add = window.document.getElementById('bt-add-'+id)
-                var bt_add_text = Number(bt_add.innerText.replace('Adicionar ', ''))
-                bt_add.innerText = `Adicionar ${bt_add_text+1}`
-                var quant_preco = window.document.getElementsByClassName('quant_preco')
-                for (var cont = 0;cont < quant_preco.length;cont++) {
-                    quant_preco[cont].value =+ 1
+                if (Number(bt_add.innerText.replace('Adicionar ', ''))) {
+                    var bt_add_text = Number(bt_add.innerText.replace('Adicionar ', ''))
+                    bt_add.innerText = `Adicionar ${bt_add_text+1}`
+                    var quant_preco = window.document.getElementById('quant_preco-'+id)
+                    quant_preco.value = Number(quant_preco.value) + 1
+                } else {
+                    bt_add.innerText = `Adicionar 1`
+                    var quant_preco = window.document.getElementById('quant_preco-'+id)
+                    quant_preco.value = Number(quant_preco.value) + 1
                 }
             }
         </script>
         <script>
             var desc_food = window.document.getElementsByClassName('desc-food')
             for (var cont = 0;cont <= desc_food.length;cont++) {
-                var nome = desc_food[cont].innerText
+                try {
+                    var nome = desc_food[cont].innerText
+                } catch {
+                    
+                }
                 var nome_1 = ''
                 if (nome.length > 38) {
                     for (var cont2 = 0;cont2 < 35;cont2++) {
@@ -348,7 +359,11 @@
         <script>
             var desc_food = window.document.getElementsByClassName('peso-food')
             for (var cont = 0;cont <= desc_food.length;cont++) {
-                var nome = desc_food[cont].innerText
+                try {
+                    var nome = desc_food[cont].innerText
+                } catch {
+
+                }
                 var nome_1 = ''
                 if (nome.length > 41) {
                     for (var cont2 = 0;cont2 < 38;cont2++) {
@@ -382,6 +397,7 @@
                                 <input type="hidden" value="{{this.item.id2}}" id="id2" name="id2"/>
                                 <button type="submit" class="btn btn-danger">Excluir</button>
                             </form>
+                            <hr>
                         </li>
                     {{else}}
                         
@@ -398,6 +414,15 @@
 
             {{/if}}
         </header>
+        <footer class="pt-baixo">
+            {{#if lista}}
+                <form action="" method="post">
+                    <button type="submit">Fazer Pedido</button>
+                </form>
+            {{else}}
+
+            {{/if}}
+        </footer>
     </section>
     </div>
 </div>
@@ -439,5 +464,12 @@
         }
     </scrip>-->
 {{else}}
+    <form method="POST" action="/veri-edit-exclu" id="form_dele"> 
+        <button type="submit" class="loca">
+            <svg xmlns="http://www.w3.org/2000/svg" width="50" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+                <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
+            </svg>
+        </button>
+    </form>
     <h1 class="tit-nem">Ainda Não Há Produtos Cadastratros :(</h1>
 {{/if}}

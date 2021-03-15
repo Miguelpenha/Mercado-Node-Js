@@ -133,7 +133,7 @@ const crypto = require('crypto')
                             l = true
                             l = false
                             if (cont >= 0) {
-                                m =+ 30 * mul
+                                m =+ 20 * mul
                                 mul++
                             }
                             var nome = req.cookies.lista[cont].nome
