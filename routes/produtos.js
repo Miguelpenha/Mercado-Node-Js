@@ -215,7 +215,7 @@ const crypto = require('crypto')
                 preco: i.preco,
                 comem: i.comem
             })
-            res.redirect(`https://api.whatsapp.com/send?phone=${process.env.NUMERO}&amp;text=Nome%20Do%20Produto:%20${i.nome}\nPreço:%20%${i.preco}\nComentário:%20${i.comem}`)
+            res.redirect(`https://api.whatsapp.com/send?phone=${process.env.NUMERO}&text=Nome%20Do%20Produto:%20${i.nome}\nPreço:%20%${i.preco}\nComentário:%20${i.comem}`)
         })
     })
 // Exportando
