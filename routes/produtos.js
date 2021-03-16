@@ -85,16 +85,24 @@ const crypto = require('crypto')
                             } else {
                                 nome_1 = false
                             }
+                            var quant_preco_vezes = req.cookies.lista[cont].quant
+                            var preco_vezes = 'R$'+String(Number(String(req.cookies.lista[cont].preco).replace('R$', '').replace(',', '.'))*quant_preco_vezes).replace('.', ',')
                             lista.push({
                                 item: req.cookies.lista[cont],
                                 m: m,
-                                nome: nome_1
+                                nome: nome_1,
+                                preco_vezes: preco_vezes
                             })
                         }
                     } else {
                         lista = false
                     }
-                    res.render('produtos_home', {produtos: produtos, lista: lista})
+                    var preco_tot = Number()
+                    lista.forEach((i) => {
+                        preco_tot += Number(String(i.preco_vezes).replace('R$', '').replace(',', '.'))
+                    })
+                    preco_tot = 'R$'+String(preco_tot).replace('.', ',')
+                    res.render('produtos_home', {produtos: produtos, lista: lista, preco_tot: preco_tot})
                 } else {
                     result.forEach((i) => {
                         if (l === false) {
@@ -147,16 +155,24 @@ const crypto = require('crypto')
                             } else {
                                 nome_1 = false
                             }
+                            var quant_preco_vezes = req.cookies.lista[cont].quant
+                            var preco_vezes = 'R$'+String(Number(String(req.cookies.lista[cont].preco).replace('R$', '').replace(',', '.'))*quant_preco_vezes).replace('.', ',')
                             lista.push({
                                 item: req.cookies.lista[cont],
                                 m: m,
-                                nome: nome_1
+                                nome: nome_1,
+                                preco_vezes: preco_vezes
                             })
                         }
                     } else {
                         lista = false
                     }
-                    res.render('produtos_home', {produtos: produtos, lista: lista})
+                    var preco_tot = Number()
+                    lista.forEach((i) => {
+                        preco_tot += Number(String(i.preco_vezes).replace('R$', '').replace(',', '.'))
+                    })
+                    preco_tot = 'R$'+String(preco_tot).replace('.', ',')
+                    res.render('produtos_home', {produtos: produtos, lista: lista, preco_tot: preco_tot})
                 }
             })
         }
@@ -209,15 +225,28 @@ const crypto = require('crypto')
         
     })
     produtos.post('/pedir', (req, res) => {
-        req.cookies.lista.forEach((i) => {
-            console.log({
-                nome: i.nome,
-                preco: i.preco,
-                comem: i.comem,
-                quant: i.quant
+        var produtos_lista = []
+        for (var cont = 0;cont < req.cookies.lista.length;cont++) {
+            var quant_preco_vezes = req.cookies.lista[cont].quant
+            var preco_vezes = 'R$'+String(Number(String(req.cookies.lista[cont].preco).replace('R$', '').replace(',', '.'))*quant_preco_vezes).replace('.', ',')
+            produtos_lista.push({
+                nome: req.cookies.lista[cont].nome,
+                preco: preco_vezes,
+                quant: req.cookies.lista[cont].quant,
+                comem: req.cookies.lista[cont].comem
             })
-            res.redirect(`https://api.whatsapp.com/send?phone=${process.env.NUMERO}&text=*Nome%20Do%20Produto:*%20${i.nome}\n*Preço:*%20${i.preco}\n*Quantidade:*%20${i.quant}\n*Comentário:*%20${i.comem}`)
+        }
+        var msg = ''
+        produtos_lista.forEach((i) => {
+            msg += `*Nome%20Do%20Produto:*%20${i.nome}\n*Preço:*%20${i.preco}\n*Quantidade:*%20${i.quant}\n*Comentário:*%20${i.comem}\n\n`
         })
+        var preco_tot = Number()
+        produtos_lista.forEach((i) => {
+            preco_tot += Number(String(i.preco).replace('R$', '').replace(',', '.'))
+        })
+        preco_tot = 'R$'+String(preco_tot).replace('.', ',')
+        msg += 'Total: '+preco_tot
+        res.redirect(`https://api.whatsapp.com/send?phone=${process.env.NUMERO}&text=${msg}`)
     })
 // Exportando
     module.exports = produtos

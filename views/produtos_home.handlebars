@@ -191,9 +191,8 @@
     }
     .pt-baixo {
         position: fixed;
-        background-color: black;
         width: 100%;
-        bottom: 0%;
+        bottom: 1.5%;
         height: 6%;
     }
     #bt-pedido {
@@ -407,7 +406,7 @@
                                 {{/if}}
                             </span>
                             <span class="lista-item-preco">
-                                {{this.item.preco}}
+                                {{this.preco_vezes}}
                             </span>
                             <br>
                             <form action="/veri-exclu-lis" method="post">
@@ -433,6 +432,7 @@
         </header>
         <footer class="pt-baixo">
             {{#if lista}}
+            <strong>Preço Total: {{preco_tot}}</strong>
                 <form action="produtos/pedir" method="post">
                     <button type="submit" id="bt-pedido">Fazer Pedido</button>
                 </form>
