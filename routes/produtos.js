@@ -168,10 +168,15 @@ const crypto = require('crypto')
                         lista = false
                     }
                     var preco_tot = Number()
-                    lista.forEach((i) => {
-                        preco_tot += Number(String(i.preco_vezes).replace('R$', '').replace(',', '.'))
-                    })
-                    preco_tot = 'R$'+String(preco_tot).replace('.', ',')
+                    try {
+                        lista.forEach((i) => {
+                            preco_tot += Number(String(i.preco_vezes).replace('R$', '').replace(',', '.'))
+                        })
+                        preco_tot = 'R$'+String(preco_tot).replace('.', ',')
+                    } catch {
+
+                    }
+                    
                     res.render('produtos_home', {produtos: produtos, lista: lista, preco_tot: preco_tot})
                 }
             })
@@ -245,7 +250,7 @@ const crypto = require('crypto')
             preco_tot += Number(String(i.preco).replace('R$', '').replace(',', '.'))
         })
         preco_tot = 'R$'+String(preco_tot).replace('.', ',')
-        msg += 'Total: '+preco_tot
+        msg += '*Total:* '+preco_tot
         res.redirect(`https://api.whatsapp.com/send?phone=${process.env.NUMERO}&text=${msg}`)
     })
 // Exportando
