@@ -213,9 +213,10 @@ const crypto = require('crypto')
             console.log({
                 nome: i.nome,
                 preco: i.preco,
-                comem: i.comem
+                comem: i.comem,
+                quant: i.quant
             })
-            res.redirect(`https://api.whatsapp.com/send?phone=${process.env.NUMERO}&text=Nome%20Do%20Produto:%20${i.nome}\nPreço:%20%${i.preco}\nComentário:%20${i.comem}`)
+            res.redirect(`https://api.whatsapp.com/send?phone=${process.env.NUMERO}&text=*Nome%20Do%20Produto:*%20${i.nome}\n*Preço:*%20${i.preco}\n*Quantidade:*%20${i.quant}\n*Comentário:*%20${i.comem}`)
         })
     })
 // Exportando
