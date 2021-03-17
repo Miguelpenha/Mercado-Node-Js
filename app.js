@@ -249,7 +249,7 @@
                                 envi.push(i)
                             })
                         }
-                        res.cookie('lista', envi)
+                        res.cookie('lista', envi, {maxAge: 86400000})
                         res.redirect('/produtos')
                     } else {
                         const envi = [
@@ -270,7 +270,7 @@
                                 envi.push(i)
                             })
                         }
-                        res.cookie('lista', envi)
+                        res.cookie('lista', envi, {maxAge: 86400000})
                         res.redirect('/produtos')
                     }
                     
@@ -288,7 +288,7 @@
                     lista.push(i)
                 }
             })
-            res.cookie('lista', lista)
+            res.cookie('lista', lista, {maxAge: 86400000})
             res.redirect('/produtos')
         })
         app.get('/lista', (req, res) => {

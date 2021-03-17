@@ -198,33 +198,16 @@
     #bt-pedido {
         width: 35%;
     }
-</style>
-<script>
-    var id = String(location.search.slice(1)).split('prato=')[1]
-    if (id) {
-        function veri_click_tit() {
-            window.location.href('http://localhost:3000/produtos')
-        }
-        var cont = window.document.getElementById('cont')
-        var cx_produto = window.document.createElement("div")
-        cx_produto.id = 'cx_produto'
-        cx_produto.style.backgroundColor = 'white'
-        cx_produto.style.position = 'absolute'
-        cx_produto.style.width = '78%'
-        cx_produto.style.height = '80%'
-        cx_produto.style.bottom = '10%'
-        cx_produto.style.left = '10%'
-        cx_produto.style.right = '90%'
-        cx_produto.style.border = '1px solid #f2f2f2'
-        cx_produto.style.boxShadow = '0px 1px 4px rgb(0 0 0 / 5%)'
-        cont.style.filter = 'blur(4px)'
-        cont.style.width = '100%'
-        window.document.body.style.width = '50.9%'
-        window.document.body.appendChild(cx_produto)
+    .cls-bt {
+        position: absolute;
+        width: 10%;
+        height: 50%;
+        margin-left: 21%;
+        margin-top: 1%;
     }
-</script>
-<div id="cont" onclick="veri_click_tit()">
-    
+</style>
+
+<div id="cont">
 {{#if produtos}}
     <header id="produtos_tit">
         <h1 class="tit">Todos Os Nossos Produtos</h1>
@@ -236,43 +219,17 @@
             </button>
         </form>
     </header>
-    <!--<section>
-        
-        {{#each produtos}}
-            {{#if this.l}}
-                <input type="hidden" value="{{this.id}}" class="id"/>
-                <a href="produtos?prato={{this.id}}" class="link-food">
-                    <div class="cx-right cx" style="margin-top: {{this.m}}px;">
-                        <span class="tit-food {{this.id}}">{{this.nome}}</span>
-                        <span class="desc-food {{this.id}}">{{this.desc}}</span>
-                        <span class="preco-food {{this.id}}">{{this.preco}}</span>
-                        <img src={{this.img}} alt={{this.desc}} class="img-food {{this.id}}"/>
-                    </div>
-                </a>
-            {{else}}
-                <input type="hidden" value="{{this.id}}" class="id"/>
-                <a href="produtos?prato={{this.id}}" class="link-food">
-                    <div class="cx-left cx" style="margin-top: {{this.m}}px;">
-                        <span class="tit-food {{this.id}}">{{this.nome}}</span>
-                        <span class="desc-food {{this.id}}">{{this.desc}}</span>
-                        <span class="preco-food {{this.id}}">{{this.preco}}</span>
-                        <img src={{this.img}} alt={{this.desc}} class="img-food {{this.id}}"/>
-                    </div>
-                </a>
-            {{/if}}
-        {{/each}}
-    </section>-->
     <section class="produtos" id="produtos">
         {{#each produtos}}
             <div class="cx" style="margin-top: {{this.pular}}%;margin-left: {{this.m}}%;">
                 <a href="/produtos?prato={{this.id}}">
-                    <img src="{{this.img}}" alt="{{this.desc}}" class="img-food">
+                    <img src="{{this.img}}" alt="{{this.desc}}" class="img-food" id="img-pro-{{this.id}}">
                 </a>
                 <div class="desc-geral-food">
                     <a href="/produtos?prato={{this.id}}">
-                        <span class="preco-food">{{this.preco}}</span>
-                        <span class="desc-food">{{this.desc}}</span>
-                        <span class="peso-food">{{this.peso}}</span>
+                        <span class="preco-food" id="preco-food-{{this.id}}">{{this.preco}}</span>
+                        <span class="desc-food" id="desc-food-{{this.id}}">{{this.desc}}</span>
+                        <span class="peso-food" id="peso-food-{{this.id}}">{{this.peso}}</span>
                     </a>
                     <nav class="menu-item-p">
                         <div class="bt-menos-menu-item-p">
@@ -296,6 +253,58 @@
                     </nav>
                 </div>
             </div>
+            <script>
+        var id = String(location.search.slice(1)).split('prato=')[1]
+        if (id) {
+            var cont = window.document.getElementById('cont')
+            var cx_produto = window.document.createElement("div")
+            cx_produto.id = 'cx_produto'
+            cx_produto.style.backgroundColor = 'white'
+            cx_produto.style.position = 'absolute'
+            cx_produto.style.width = '78%'
+            cx_produto.style.height = '80%'
+            cx_produto.style.bottom = '10%'
+            cx_produto.style.left = '10%'
+            cx_produto.style.right = '90%'
+            cx_produto.style.border = '1px solid #f2f2f2'
+            cx_produto.style.boxShadow = '0px 1px 4px rgb(0 0 0 / 5%)'
+            cont.style.filter = 'blur(4px)'
+            cont.style.width = '100%'
+            window.document.body.style.width = '50.9%'
+            var img_pro_id = window.document.getElementById('img-pro-'+id)
+            var img_pro = window.document.createElement("img")
+            img_pro.src = img_pro_id.src
+            img_pro.style.width = '25%'
+            img_pro.style.height = '25%'
+            img_pro.style.objectFit = 'cover'
+            img_pro.style.objectPosition = 'center'
+            img_pro.style.borderRadius = '5%'
+            img_pro.style.border = '1px solid #f2f2f2'
+            img_pro.style.boxShadow = '0px 1px 4px rgb(0 0 0 / 5%)'
+            img_pro.style.marginLeft = '5%'
+            img_pro.style.marginTop = '5%'
+            var txt_desc_origin = window.document.getElementById('desc-food-'+id)
+            var txt_desc = window.document.createElement('span')
+            txt_desc.innerText = txt_desc_origin.innerText
+            txt_desc.style.marginLeft = '60%'
+            txt_desc.style.fontSize = '1.5rem'
+            var txt_peso_origin = window.document.getElementById('peso-food-'+id)
+            var txt_peso = window.document.createElement('span')
+            txt_peso.innerText = txt_peso_origin.innerText
+            txt_peso.style.color = '#717171'
+            txt_peso.style.position = 'absolute'
+            txt_peso.style.marginLeft = '50%'
+            txt_peso.style.marginTop = '10%'
+            var txt_preco_origin = window.document.getElementById('preco-food-'+id)
+            var txt_preco = window.document.createElement('span')
+            txt_preco.innerText = txt_preco_origin.innerText
+            cx_produto.appendChild(txt_preco)
+            cx_produto.appendChild(txt_peso)
+            cx_produto.appendChild(txt_desc)
+            cx_produto.appendChild(img_pro)
+            window.document.body.appendChild(cx_produto)
+        }
+    </script>
             {{#if this.ultimo}}
                 <a href="" class="mais">Ver Todos Os Produtos>></a>
             {{else}}
@@ -426,60 +435,25 @@
         <header class="lista-tit-part">
             {{#if lista}}
                 <h4 class="tit-lista">Produtos Na Lista: </h4>
+                <form action="produtos/cls-lista" method="post">
+                    <button class="btn btn-danger cls-bt">Limpar Lista</button>
+                </form>
             {{else}}
 
             {{/if}}
         </header>
         <footer class="pt-baixo">
             {{#if lista}}
-            <strong>Preço Total: {{preco_tot}}</strong>
+                <strong>Preço Total: {{preco_tot}}</strong>
                 <form action="produtos/pedir" method="post">
                     <button type="submit" id="bt-pedido">Fazer Pedido</button>
                 </form>
             {{else}}
-
             {{/if}}
         </footer>
     </section>
     </div>
 </div>
-    <!--<script>
-        var id = String(location.search.slice(1)).split('prato=')[1]
-        if (id) {
-            var form_comem = window.document.getElementById('form_comem')
-            form_comem.method = 'POST'
-            form_comem.action = '/veri-cadas-lis?preco='+window.document.getElementById('div_txt_2').innerText
-            var res = window.document.getElementById('res')
-            var mais_link = window.document.getElementById('mais_link')
-            var menos_link = window.document.getElementById('menos_link')
-            mais_link.addEventListener("click", (ev) => {
-                var div_txt_2 = window.document.getElementById('div_txt_2')
-                var precos_brutos = window.document.getElementsByClassName('preco-food')
-                var preco = ''
-                for (var cont = 0;cont < precos_brutos.length;cont++) {
-                    if (precos_brutos[cont].className.split(' ')[1] === id) {
-                        preco = String(precos_brutos[cont].innerText)
-                    }
-                }
-                preco = Number(preco.replace('R$', '').replace(',', '.'))
-                div_txt_2.innerText = 'R$'+String(parseFloat(String(preco * Number(res.innerText))).toFixed(2)).replace('.', ',')
-                form_comem.action = '/veri-cadas-lis?preco='+'R$'+String(parseFloat(String(preco * Number(res.innerText))).toFixed(2)).replace('.', ',')
-            })
-            menos_link.addEventListener("click", (en) => {
-                var div_txt_2 = window.document.getElementById('div_txt_2')
-                var precos_brutos = window.document.getElementsByClassName('preco-food')
-                var preco = ''
-                for (var cont = 0;cont < precos_brutos.length;cont++) {
-                    if (precos_brutos[cont].className.split(' ')[1] === id) {
-                        preco = String(precos_brutos[cont].innerText)
-                    }
-                }
-                preco = Number(preco.replace('R$', '').replace(',', '.'))
-                div_txt_2.innerText = 'R$'+String(parseFloat(String(preco * Number(res.innerText))).toFixed(2)).replace('.', ',')
-                form_comem.action = '/veri-cadas-lis?preco='+'R$'+String(parseFloat(String(preco * Number(res.innerText))).toFixed(2)).replace('.', ',')
-            })
-        }
-    </scrip>-->
 {{else}}
     <form method="POST" action="/veri-edit-exclu" id="form_dele"> 
         <button type="submit" class="loca">

@@ -15,7 +15,7 @@ const path = require('path')
     })
     admin.get('/envi', (req, res) => {
         if (req.cookies.admin) {
-            if (req.query.edit) {
+            if (req.query) {
                 ProdutoModels.findById(req.query.id, (err, result) => {
                     res.render('admin/envi', {senha: process.env.SENHA_ADMIN, edit: true, nome: result.nome_Produto, categoria: result.categoria, fileName_Img: result.fileName_Img, nomeOrigin: result.nomeOrigin, peso: result.peso, marca: result.marca, preco: result.preco, desc: result.desc, id: result.id, login: process.env.LOGIN_ADMIN})
                 })

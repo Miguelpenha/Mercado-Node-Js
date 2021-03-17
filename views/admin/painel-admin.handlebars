@@ -82,6 +82,7 @@
                 <button type="submit" class="btn btn-danger bt-exclu-produto">Excluir Produto</button>
             </form>
             <form action="/admin/envi?edit=true&id={{this.produto.id}}" method="GET">
+                <input type="hidden" name="id" id="id" value="{{this.produto.id}}">
                 <button type="submit" class="btn btn-primary bt-edit-produto">Editar Produto</button>
             </form>
         </div>
@@ -97,9 +98,8 @@
                 <input type="hidden" name="id" id="id" value="{{this.produto.id}}">
                 <button type="submit" class="btn btn-danger bt-exclu-produto">Excluir Produto</button>
             </form>
-            <form action="/admin/envi" method="GET">
+            <form action="/admin/envi?edit=true&id={{this.produto.id}}" method="GET">
                 <input type="hidden" name="id" id="id" value="{{this.produto.id}}">
-                <input type="hidden" name="edit" id="edit" value="true">
                 <button type="submit" class="btn btn-primary bt-edit-produto">Editar Produto</button>
             </form>
         </div>

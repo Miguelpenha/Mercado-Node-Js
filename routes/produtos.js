@@ -37,28 +37,55 @@ const crypto = require('crypto')
                                 mul =1
                             }
                             if (cont === 11) {
-                                produtos.push({
-                                    nome: i.nome_Produto,
-                                    desc: i.desc,
-                                    img: `/uploads/${i.fileName_Img}`,
-                                    preco: i.preco,
-                                    id: i.id,
-                                    m: m,
-                                    pular: pular,
-                                    ultimo: true,
-                                    peso: i.peso
-                                })
+                                if (i.fileName_Img === 'Padrão.png') {
+                                    produtos.push({
+                                        nome: i.nome_Produto,
+                                        desc: i.desc,
+                                        img: `/uploads/${i.fileName_Img}`,
+                                        preco: i.preco,
+                                        id: i.id,
+                                        m: m,
+                                        pular: pular,
+                                        ultimo: true,
+                                        peso: i.peso
+                                    })
+                                } else {
+                                    produtos.push({
+                                        nome: i.nome_Produto,
+                                        desc: i.desc,
+                                        img: `/uploads/baixados/${i.fileName_Img}`,
+                                        preco: i.preco,
+                                        id: i.id,
+                                        m: m,
+                                        pular: pular,
+                                        ultimo: true,
+                                        peso: i.peso
+                                    })
+                                }
                             } else {
-                                produtos.push({
-                                    nome: i.nome_Produto,
-                                    desc: i.desc,
-                                    img: `/uploads/baixados/${i.fileName_Img}`,
-                                    preco: i.preco,
-                                    id: i.id,
-                                    m: m,
-                                    pular: pular,
-                                    peso: i.peso
-                                })
+                                if (i.fileName_Img === 'Padrão.png') {
+                                    produtos.push({
+                                        nome: i.nome_Produto,
+                                        desc: i.desc,
+                                        img: `/uploads/${i.fileName_Img}`,
+                                        preco: i.preco,
+                                        id: i.id,
+                                        m: m,
+                                        pular: pular,
+                                        peso: i.peso
+                                    })
+                                } else {
+                                    produtos.push({
+                                        nome: i.nome_Produto,
+                                        desc: i.desc,
+                                        img: `/uploads/baixados/${i.fileName_Img}`,
+                                        preco: i.preco,
+                                        id: i.id,
+                                        m: m,
+                                        pular: pular,
+                                        peso: i.peso
+                                    })
+                                }
                             }
                             cont++
                         }
@@ -121,16 +148,29 @@ const crypto = require('crypto')
                             m = 0
                             mul =1
                         }
-                        produtos.push({
-                            nome: i.nome_Produto,
-                            desc: i.desc,
-                            img: `/uploads/baixados/${i.fileName_Img}`,
-                            preco: i.preco,
-                            id: i.id,
-                            m: m,
-                            pular: pular,
-                            peso: i.peso
-                        })
+                        if (i.fileName_Img === 'Padrão.png') {
+                            produtos.push({
+                                nome: i.nome_Produto,
+                                desc: i.desc,
+                                img: `/uploads/${i.fileName_Img}`,
+                                preco: i.preco,
+                                id: i.id,
+                                m: m,
+                                pular: pular,
+                                peso: i.peso
+                            })
+                        } else {
+                            produtos.push({
+                                nome: i.nome_Produto,
+                                desc: i.desc,
+                                img: `/uploads/baixados/${i.fileName_Img}`,
+                                preco: i.preco,
+                                id: i.id,
+                                m: m,
+                                pular: pular,
+                                peso: i.peso
+                            })
+                        }
                         cont++
                     })
                     var lista = []
@@ -251,7 +291,12 @@ const crypto = require('crypto')
         })
         preco_tot = 'R$'+String(preco_tot).replace('.', ',')
         msg += '*Total:* '+preco_tot
+        res.cookie('lista', '', {maxAge: 0})
         res.redirect(`https://api.whatsapp.com/send?phone=${process.env.NUMERO}&text=${msg}`)
+    })
+    produtos.post('/cls-lista', (req, res) => {
+        res.cookie('lista', '', {maxAge: 0})
+        res.redirect('/produtos')
     })
 // Exportando
     module.exports = produtos
