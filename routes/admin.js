@@ -17,7 +17,11 @@ const path = require('path')
         if (req.cookies.admin) {
             if (req.query) {
                 ProdutoModels.findById(req.query.id, (err, result) => {
-                    res.render('admin/envi', {senha: process.env.SENHA_ADMIN, edit: true, nome: result.nome_Produto, categoria: result.categoria, fileName_Img: result.fileName_Img, nomeOrigin: result.nomeOrigin, peso: result.peso, marca: result.marca, preco: result.preco, desc: result.desc, id: result.id, login: process.env.LOGIN_ADMIN})
+                    try {
+                        res.render('admin/envi', {senha: process.env.SENHA_ADMIN, edit: true, nome: result.nome_Produto, categoria: result.categoria, fileName_Img: result.fileName_Img, nomeOrigin: result.nomeOrigin, peso: result.peso, marca: result.marca, preco: result.preco, desc: result.desc, id: result.id, login: process.env.LOGIN_ADMIN})
+                    } catch {
+                        
+                    }
                 })
             } else {
                 res.render('admin/envi', {senha: process.env.SENHA_ADMIN, login: process.env.LOGIN_ADMIN})

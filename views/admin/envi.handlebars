@@ -2,32 +2,110 @@
     .req{
         color: #d93025;
     }
+    
+    .campo {
+        width: 80%;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    input, textarea {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        transition-timing-function: linear;
+        transition-duration: 0.1s;
+        background-color: white;
+    }
+
+    textarea {
+        resize: none;
+    }
+    
+    input:focus, textarea:focus {
+        box-shadow: 0 0 0 0;
+        outline: 0;
+        border: 1px solid #0974ff;
+    }
+
+    .btns {
+        width: 100%;
+    }
+
+    button {
+        width: 45%;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-left: 3%;
+    }
+
+    #form {
+        border-radius: 5px;
+        background-color: #f2f2f2;
+        padding: 20px;
+        width: 60%;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 2%;
+        margin-bottom: 2%;
+    }
+    .campo-file input{
+        cursor: pointer;
+    }
 </style>
 {{#if edit}}
-    <form method="POST" enctype="multipart/form-data" action="/veri-produto?edit=true">
-        <input type="hidden" name="id" id="id" value="{{id}}">
-        <input type="hidden" value="false" name="api" id="api"/>
-        <input type="hidden" name="login" id="login" value="{{login}}">
-        <input type="hidden" name="fileName_Img" id="fileName_Img" value="{{fileName_Img}}">
-        <input type="hidden" name="originalname" id="originalname" value="{{nomeOrigin}}">
-        <input type="hidden" name="senha" id="senha" value="{{senha}}">
-        Nome: <span class="req">*</span><br><input type="text" required id="nome" name="nome" value="{{nome}}"/>
+    <form method="POST" enctype="multipart/form-data" action="/veri-produto?edit=true" id="form">
+        <div id="secrets">
+            <input type="hidden" name="id" id="id" value="{{id}}">
+            <input type="hidden" value="false" name="api" id="api"/>
+            <input type="hidden" name="login" id="login" value="{{login}}">
+            <input type="hidden" name="fileName_Img" id="fileName_Img" value="{{fileName_Img}}">
+            <input type="hidden" name="originalname" id="originalname" value="{{nomeOrigin}}">
+            <input type="hidden" name="senha" id="senha" value="{{senha}}">
+        </div>
+        <div class="campo">
+            <label for="nome">Nome: </label><span class="req">*</span><br><input type="text" required id="nome" name="nome" value="{{nome}}"/>
+        </div>
         <br>
-        Categoria: <span class="req">*</span><br><input type="text" required id="categoria" name="categoria" value="{{categoria}}"/>
+        <div class="campo">
+            <label for="categoria">Categoria: </label><span class="req">*</span><br><input type="text" required id="categoria" name="categoria" value="{{categoria}}"/>
+        </div>
         <br>
-        Peso: <span class="req">*</span><br><input type="text" required id="peso" name="peso" value="{{peso}}"/>
+        <div class="campo">
+            <label for="peso">Peso: </label><span class="req">*</span><br><input type="text" required id="peso" name="peso" value="{{peso}}"/>
+        </div>
         <br>
-        Marca: <span class="req">*</span><br><input type="text" required id="marca" name="marca" value="{{marca}}"/>
+        <div class="campo">
+            <label for="marca">Marca: </label><span class="req">*</span><br><input type="text" required id="marca" name="marca" value="{{marca}}"/>
+        </div>
         <br>
-        Preço: <span class="req">*</span><br><input type="text" required id="preco" name="preco" value="{{preco}}"/>
+        <div class="campo">
+            <label for="preço">Preço: </label><span class="req">*</span><br><input type="text" required id="preco" name="preco" value="{{preco}}"/>
+        </div>
         <br>
-        Descrição Do Produto: <span class="req">*</span><br><textarea required id="desc" name="desc">{{desc}}</textarea>
+        <div class="campo">
+            <label for="descrição-do-produto">Descrição do Produto: </label><span class="req">*</span><br><textarea required id="desc" name="desc" spellcheck="true">{{desc}}</textarea>
+        </div>
         <br>
-        Foto Do Produto: <br><input type="file" name="file" id="file">
-        <input type="submit" value="Enviar" class="btn btn-success"/>
-        <a href="painel-admin">
-            <button type="button" class="btn btn-danger">Cancelar</button>
-        </a>
+        <div class="campo campo-file">
+            <label for="foto-do-produto">Foto do Produto: </label><br><input type="file" name="file" id="file">
+        </div>
+        <div class="btns">
+            <button type="submit" class="btn btn-success">Enviar</button>
+            <a href="painel-admin">
+                <button type="button" class="btn btn-danger">Cancelar</button>
+            </a>
+        </div>
     </form>
 {{else}}
     <form method="POST" enctype="multipart/form-data" action="/veri-produto">
