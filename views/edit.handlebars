@@ -1,65 +1,134 @@
-<style>
-    .req{
-        color: #d93025;
-        margin-right: 2px;
-    }
+{{#if exclu}}
+    <style>
+        .req{
+            color: #d93025;
+            margin-right: 2px;
+        }
 
-    .campo {
-        width: 50%;
-        display: inline-block;
-        box-sizing: border-box;
-    }
+        .campo {
+            width: 50%;
+            display: inline-block;
+            box-sizing: border-box;
+        }
 
-    .campo input{
-        padding: 12px 20px;
-        width: 100%;
-        margin: 8px 0;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-        transition-timing-function: linear;
-        transition-duration: 0.1s;
-    }
+        .campo input{
+            padding: 12px 20px;
+            width: 100%;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            transition-timing-function: linear;
+            transition-duration: 0.1s;
+        }
 
-    .campo input[type=text]:focus {
-        box-shadow: 0 0 0 0;
-        outline: 0;
-        border: 1px solid#0974ff;
-    }
+        .campo input[type=text]:focus {
+            box-shadow: 0 0 0 0;
+            outline: 0;
+            border: 1px solid#0974ff;
+        }
 
-    .campo {
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-    }
+        .campo {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
 
-    .btns {
-        width: 100%;
-    }
+        form {
+            border-radius: 5px;
+            background-color: #f2f2f2;
+            padding: 20px;
+            width: 80%;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 2%;
+            margin-bottom: 5%;
+        }
 
-    input[type=submit] {
-        width: 43%;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        padding: 1%;
-        margin-left: 4.5%;
-    }
+        .btns {
+            width: 100%;
+        }
 
-    form {
-        border-radius: 5px;
-        background-color: #f2f2f2;
-        padding: 20px;
-        width: 80%;
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-        margin-top: 2%;
-        margin-bottom: 5%;
-    }
-</style>
+        input[type=submit] {
+            width: 43%;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            padding: 1%;
+            margin-left: 4.5%;
+        }
+    </style>
+{{else}}
+    <style>
+        .req{
+            color: #d93025;
+            margin-right: 2px;
+        }
+
+        .campo {
+            width: 50%;
+            display: inline-block;
+            box-sizing: border-box;
+            min-width: 100%;
+        }
+
+        .campo input{
+            padding: 12px 20px;
+            width: 100%;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            transition-timing-function: linear;
+            transition-duration: 0.1s;
+        }
+
+        .campo input[type=text]:focus {
+            box-shadow: 0 0 0 0;
+            outline: 0;
+            border: 1px solid#0974ff;
+        }
+
+        .btn-solo {
+            width: 100%;
+        }
+
+        .btn-solo input[type=submit] {
+            width: 43%;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            display: block;
+            margin-right: auto;
+            margin-left: auto;
+            min-width: 100%;
+        }
+
+        .campo {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        form {
+            border-radius: 5px;
+            background-color: #f2f2f2;
+            padding: 20px;
+            width: 80%;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 2%;
+            margin-bottom: 5%;
+        }
+    </style>
+{{/if}}
+
 <form method="POST" action="/edit-veri" id="form">
     <br>
     <div class="campo">
@@ -87,14 +156,16 @@
     </div>
     <br>
     <br>
-    <div class="btns">
-        <input type="submit" value="Enviar" id="enviar" class="btn btn-primary">
-        {{#if exclu}}
+    {{#if exclu}}
+        <div class="btns">
+            <input type="submit" value="Enviar" id="enviar" class="btn btn-primary">
             <input type="submit" value="Excluir" id="excluir" onclick="veri2()" class="btn btn-danger">
-        {{else}}
-            
-        {{/if}}
-    </div>
+        </div>
+    {{else}}
+        <div class="btn-solo">
+            <input type="submit" value="Enviar" id="enviar" class="btn btn-primary">
+        </div>
+    {{/if}}
 </form>
 <script>
     function veri2() {
