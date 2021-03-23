@@ -1,110 +1,100 @@
 <style>
-    .tit {
-        text-align: center;
-        margin-top: 1%;
-    }
-    .cx {
-        position: absolute;
+    .produto {
+        border-radius: 5px;
+        background-color: #f2f2f2;
+        padding: 20px;
+        margin-top: 2%;
         width: 30%;
-        border: 2px solid #f2f2f2;
-        box-shadow: 0px 2.5px 10px rgb(0 0 0 / 5%);
-        background-color: white;
-        left: 20%;
-        right: 80%;
-        height: 20%;
-        border-radius: 0.5rem;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
     }
-    .form {
-        position: absolute;
-        margin-left: 1%;
+
+    .btns {
+        width: 100%;
+        display: inline-block;
     }
-    .txt-food {
-        margin-left: 1%;
+
+    .btns input[type=submit]{
+        width: 40%;
+        float: left;
+        margin-left: 7%;
+        min-width: 40%;
     }
+
     .produtos {
-        margin-top: 4%;
+        width: 80%;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 6%;
     }
-    .bt-exclu-produto {
-        position: absolute;
-        bottom: 4%;
-        left: 1%;
-        height: 27.1%;
-        font-size: 1rem;
-    }
-    .bt-edit-produto {
-        position: absolute;
-        bottom: 4%;
-        left: 33%;
-        height: 27.1%;
-        font-size: 1rem;
-    }
+
     .nome-food {
-        font-size: 1.5vw;
+        width: 100%;
+        font-size: 1.8em;
+        min-width: 100%;
     }
+
     .num-food {
-        font-size: 1.3vw;
+        width: 75%;
+        font-size: 1.2em;
     }
-    .tit-nt {
-        position: absolute;
-        left: 35%;
-        right: 65%;
-        border: 2px solid #f2f2f2;
-        box-shadow: 0px 2.5px 10px rgb(0 0 0 / 5%);
-        background-color: white;
-        width: 34%;
-        padding: 1%;
-        border-radius: 5rem;
+
+    .btn {
+        font-size: 1em;
+    }
+
+    .cx {
+        width: 100%;
+    }
+
+    .btn-p {
+        margin-left: 1%;
+    }
+
+    .tit {
+        margin-left: 1%;
+    }
+
+    .txt-food {
+        display: inline-block;
+        width: 100%;
     }
 </style>
-<h1 class="tit">Painel Admin</h1>
-
-<form action="/admin/envi" method="get" class="form">
-    <button class="btn btn-success" type="submit">Cadastrar Produto</button>
-</form>
-<br>
-<br>
-<form action="/admin/cls-login" method="get" class="form">
-    <button class="btn btn-danger" type="submit">Deletar Todos Os Produtos</button>
-</form>
-
-<div class="produtos">
+<div class="cx">
+    <span>
+        <h1 class="tit">Painel Admin</h1>
+        <form action="/admin/envi" method="get" class="form">
+            <button class="btn btn-success btn-p" type="submit">Cadastrar Produto</button>
+        </form>
+        <br>
+        <form action="/admin/cls-login" method="get" class="form">
+            <button class="btn btn-danger btn-p" type="submit">Deletar Todos Os Produtos</button>
+        </form>
+    </span>
+    <div class="produtos">
     {{#each produtos}}
-        {{#if this.produto.l}}
-            <div class="cx" style="margin-top: {{this.produto.pular}}%;margin-left: 30.5%;">
-            <div class="txt-food">
+        <div class="produto">
+            <span class="txt-food">
                 <h4 class="nome-food">Nome: {{this.produto.nome}}</h4>
                 <h5 class="num-food">Número De Vendas: {{this.produto.vendas}}</h5>
-                <br>
-                <br>
+            </span>
+            <br>
+            <br>
+            <div class="btns">
+                <form action="/admin/exclu-produto" method="POST">
+                    <input type="hidden" name="id" id="id" value="{{this.produto.id}}">
+                    <input type="submit" class="btn btn-danger" value="Excluir Produto">
+                </form>
+                <form action="/admin/envi?edit=true&id={{this.produto.id}}" method="GET">
+                    <input type="hidden" name="id" id="id" value="{{this.produto.id}}">
+                    <input type="submit" class="btn btn-primary" value="Editar Produto"/>
+                </form>
             </div>
-            <form action="/admin/exclu-produto" method="POST">
-                <input type="hidden" name="id" id="id" value="{{this.produto.id}}">
-                <button type="submit" class="btn btn-danger bt-exclu-produto">Excluir Produto</button>
-            </form>
-            <form action="/admin/envi?edit=true&id={{this.produto.id}}" method="GET">
-                <input type="hidden" name="id" id="id" value="{{this.produto.id}}">
-                <button type="submit" class="btn btn-primary bt-edit-produto">Editar Produto</button>
-            </form>
         </div>
-        {{else}}
-            <div class="cx" style="margin-top: {{this.produto.pular}}%;">
-            <div class="txt-food">
-                <h4 class="nome-food">Nome: {{this.produto.nome}}</h4>
-                <h5 class="num-food">Número De Vendas: {{this.produto.vendas}}</h5>
-                <br>
-                <br>
-            </div>
-            <form action="/admin/exclu-produto" method="POST">
-                <input type="hidden" name="id" id="id" value="{{this.produto.id}}">
-                <button type="submit" class="btn btn-danger bt-exclu-produto">Excluir Produto</button>
-            </form>
-            <form action="/admin/envi?edit=true&id={{this.produto.id}}" method="GET">
-                <input type="hidden" name="id" id="id" value="{{this.produto.id}}">
-                <button type="submit" class="btn btn-primary bt-edit-produto">Editar Produto</button>
-            </form>
-        </div>
-        {{/if}}
     {{else}}
         <h3 class="tit-nt">Ainda Não Há Produtos Cadastrados :(</h3>
     {{/each}}
+</div>
 </div>

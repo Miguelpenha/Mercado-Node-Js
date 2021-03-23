@@ -95,7 +95,10 @@
         }
 
         .btn-solo {
-            width: 100%;
+            width: 40%;
+            display: block;
+            margin-right: auto;
+            margin-left: auto;
         }
 
         .btn-solo input[type=submit] {
@@ -126,33 +129,64 @@
             margin-top: 2%;
             margin-bottom: 5%;
         }
+
+        .campo-jt-1{
+            width: 100%;
+            display: inline-block;
+            box-sizing: border-box;
+        }
+
+        .campo-jt-1 .campo-jt {
+            width: 48%;
+            display: block;
+            margin-left: 1.3%;
+            float: left;
+        }
+        .campo-jt-1 .campo-jt input {
+            padding: 12px 20px;
+            width: 100%;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            transition-timing-function: linear;
+            transition-duration: 0.1s;
+        }
+
+        .campo-jt-1 .campo-jt input:focus {
+            box-shadow: 0 0 0 0;
+            outline: 0;
+            border: 1px solid#0974ff;
+        }
     </style>
 {{/if}}
 
 <form method="POST" action="/edit-veri" id="form">
     <br>
-    <div class="campo">
-        <label for="estado" class="txt">Estado: </label><span class="req">*</span><br><input required value="{{estado}}" type="text" id="estado" placeholder="Estado" name="estado"/>
+    <div class="campo-jt-1">
+        <div class="campo-jt">
+            <label for="estado" class="txt">Estado: </label><span class="req">*</span><br><input required value="{{estado}}" type="text" id="estado" placeholder="Estado" name="estado"/>
+        </div>
+        <div class="campo-jt">
+            <label for="cidade" class="txt">Cidade: </label><span class="req">*</span><br><input required value="{{cidade}}" type="text" id="cidade" placeholder="Cidade" name="cidade"/>
+        </div>
     </div>
     <br>
-    <div class="campo">
-        <label for="cidade" class="txt">Cidade: </label><span class="req">*</span><br><input required value="{{cidade}}" type="text" id="cidade" placeholder="Cidade" name="cidade"/>
+    <div class="campo-jt-1">
+        <div class="campo-jt">
+            <label for="bairro" class="txt">Bairro: </label><span class="req">*</span><br><input required value="{{bairro}}" type="text" id="bairro" placeholder="Bairro" name="bairro"/>
+        </div>
+        <div class="campo-jt">
+            <label for="rua" class="txt">Rua: </label><span class="req">*</span><br><input required value="{{rua}}" type="text" id="rua" placeholder="Rua" name="rua"/>
+        </div>
     </div>
     <br>
-    <div class="campo">
-        <label for="bairro" class="txt">Bairro: </label><span class="req">*</span><br><input required value="{{bairro}}" type="text" id="bairro" placeholder="Bairro" name="bairro"/>
-    </div>
-    <br>
-    <div class="campo">
-        <label for="rua" class="txt">Rua: </label><span class="req">*</span><br><input required value="{{rua}}" type="text" id="rua" placeholder="Rua" name="rua"/>
-    </div>
-    <br>
-    <div class="campo">
-        <label for="numero-da-casa" class="txt">Número Da Casa: </label><span class="req">*</span><br><input required type="text" id="num" placeholder="Número Da Casa" name="num" value="{{num}}"/>
-    </div>
-    <br>
-    <div class="campo">
-        <label for="complemento-ou-referencia" class="txt">Complemento Ou Referência: </label><br><input type="text" id="comple" placeholder="Complemento Ou Referência" name="comple" value="{{comple}}">
+    <div class="campo-jt-1">
+        <div class="campo-jt">
+            <label for="numero-da-casa" class="txt">Número Da Casa: </label><span class="req">*</span><br><input required type="text" id="num" placeholder="Número Da Casa" name="num" value="{{num}}"/>
+        </div>
+        <div class="campo-jt">
+            <label for="complemento-ou-referencia" class="txt">Complemento Ou Referência: </label><br><input type="text" id="comple" placeholder="Complemento Ou Referência" name="comple" value="{{comple}}">
+        </div>
     </div>
     <br>
     <br>
