@@ -1,40 +1,532 @@
 <style>
-    html, body {
+    .tit{
+        text-align: center;
+        text-decoration: underline solid #0974ff;
+        margin-right: 33%;
+    }
+    .tit-nem{
+        position: absolute;
+        left: 0;
+        right: 0;
+        text-align: center;
+        margin-top: 5%;
+    }
+    .tit-food{
+        position: absolute;
+        width: 50%;
         height: 100%;
+        font-size: 1.3vw;
+        margin-top: 2%;
+        margin-left: 2%;
+        color: #3E3E3E;
+        text-align: justify;
     }
-
-    .tit-prin-1 {
-        width: 65%;
-        border-bottom: 1px solid #f2f2f2;
-        box-shadow: 0px 1px 4px rgb(0 0 0 / 5%);
+    .img-food{
+        position: absolute;
+        border-radius: 5%;
+        width: 100%;
+        height: 40%;
+        object-fit: cover;
+        object-position: center;
     }
-
-    .tit-prin-2 {
-        width: 35.8%;
-        margin-right: 0%;
+    .loca{
+        border: 0;
+        background-color: transparent;
+        transition-timing-function: linear;
+        transition-duration: 0.1s;
+    }
+    .loca:hover {
+        color: rgb(51, 51, 51);
+    }
+    .img-bolsa{
+        margin-left: 2800%;
+    }
+    .form_dele{
+        position: absolute;    
+    }
+    .lista {
+        position: fixed;
+        background-color: white;
+        width: 32%;
+        height: 100%;
+        right: 0;
+        top: 0;
         border: 1px solid #f2f2f2;
         box-shadow: 0px 1px 4px rgb(0 0 0 / 5%);
     }
-    
-    .tit-prin-txt {
-        font-size: 2.5em;
-        text-decoration: underline #0974ff;
+    .lista-tit-part {
+        position: fixed;
+        background-color: white;
+        width: 100%;
+        height: 10%;
+        border-bottom: 1px solid #f2f2f2;
+        box-shadow: 0px 1px 4px rgb(0 0 0 / 5%);
+    }
+    .tit-lista {
+        position: fixed;
+    }
+    .lista-todos {
+        position: absolute;
+        width: 86%;
+        height: 100%;
+        margin-top: 15%;
+        left: 12%;
+    }
+    .lista-item {
+        position: absolute;
+        width: 86%;
+        height: 20%;
+        text-align: justify;
+        left: 5%;
+        list-style-type: none;
+    }
+    .lista-item-nome-x {
+        font-size: 18px;
+    }
+    .lista-item-nome {
+        font-size: 20px;
+        color: #3f3e3e;
+    }
+    .lista-item-preco {
+        font-weight: 600;
+        margin-left: 8%;
+    }
+    .tit-nt {
+        position: absolute;
+        margin-top: 40%;
+        left: 0;
+        right: 0;
         text-align: center;
     }
-
-    .menu-di {
+    .lista {
+        overflow-y: auto;
+    }
+    .btn-danger {
+        width: 20%;
+        height: 20%;
+        font-size: 15px;
+        text-align: center;
+    }
+    .produtos {
+        display: inline-block;
+        margin-left: 2%;
+        margin-bottom: 38%;
+        margin-top: 3%;
+    }
+    .cx{
+        position: absolute;
+        border: 1px solid #f2f2f2;
+        box-shadow: 0px 1px 4px rgb(0 0 0 / 5%);
+        width: 9.5%;
+        margin-right: 33%;
+        height: 32%;
+        border-radius: 1%/4%;
+    }
+    .mais {
+        position: absolute;
+        margin-top: 33%;
+        margin-left: 26%;
+    }
+    .desc-geral-food {
+        position: absolute;
+        margin-top: 65%;
+        margin-left: 0.5%;
+        width: 100%;
         height: 100%;
     }
+    .preco-food{
+        position: absolute;
+        font-size: 1.125vw;
+        color: #3e3e3e;
+        font-weight: bold;
+    }
+    .desc-food{
+        position: absolute;
+        color: #3e3e3e;
+        margin-top: 18%;
+        font-size: 1vw;
+        width: 100%;
+    }
+    .peso-food {
+        position: absolute;
+        margin-top: 55%;
+        color: #717171;
+        font-size: 0.875vw;
+    }
+    .menu-item-p {
+        position: absolute;
+        height: 15%;
+        top: 45%;
+        width: 100%;
+    }
+    .bt-menos-menu-item-p {
+        position: absolute;
+        width: 90%;
+    }
+    .bt-menos-menu-item-p-a {
+        position: absolute;
+        margin-bottom: 100%;
+        background-color: #0974FF;
+        border-radius: 5px;
+        width: 25%;
+        min-width: 25%;
+        border: none;
+    }
+    .bt-menos-menu-item-p-a:hover {
+        background-color: #0765e0;
+    }
+    .bt-mais-menu-item-p {
+        position: absolute;
+        width: 90%;
+        margin-left: 18%;
+    }
+    .bt-mais-menu-item-p-a {
+        position: absolute;
+        margin-bottom: 100%;
+        background-color: #0974FF;
+        border-radius: 5px;
+        width: 25%;
+        min-width: 25%;
+        border: none;
+    }
+    .bt-mais-menu-item-p-a:hover {
+        background-color: #0765e0;
+    }
+    .bt-adicionar-menu-item-p {
+        position: absolute;
+        margin-left: 35%;
+        border: none;
+        background-color: #0974FF;
+        width: 65%;
+        min-width: 60%;
+        border-radius: 5px;
+        height: 75%;
+        min-height: 70%;
+        color: white;
+        font-size: 1vw;
+        transition-timing-function: linear;
+        transition-duration: 0.1s;
+    }
+    .bt-adicionar-menu-item-p:hover {
+        background-color: #0765e0;
+    }
+    .pt-baixo {
+        position: fixed;
+        width: 100%;
+        bottom: 1.5%;
+        height: 6%;
+    }
+    #bt-pedido {
+        width: 35%;
+    }
+    .cls-bt {
+        position: absolute;
+        width: 10%;
+        height: 50%;
+        margin-left: 21%;
+        margin-top: 1%;
+    }
 </style>
-<div class="row tit-prin-1" style="float: left;">
-    <div class="col-sm-12" style="border: 1px solid #f2f2f2;box-shadow: 0px 1px 4px rgb(0 0 0 / 5%);">
-        <div class="tit-prin-txt">Todos Os Nossos Produtos</div>
+
+<div id="cont">
+{{#if produtos}}
+    <header id="produtos_tit">
+        <h1 class="tit">Todos Os Nossos Produtos</h1>
+        <form method="POST" action="/veri-edit-exclu" id="form_dele"> 
+            <button type="submit" class="loca">
+                <svg xmlns="http://www.w3.org/2000/svg" width="50" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+                    <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
+                </svg>
+            </button>
+        </form>
+    </header>
+    <section class="produtos" id="produtos">
+        {{#each produtos}}
+            <div class="cx" style="margin-top: {{this.pular}}%;margin-left: {{this.m}}%;">
+                <a href="/produtos?prato={{this.id}}">
+                    <img src="{{this.img}}" alt="{{this.desc}}" class="img-food" id="img-pro-{{this.id}}">
+                </a>
+                <div class="desc-geral-food">
+                    <a href="/produtos?prato={{this.id}}">
+                        <span class="preco-food" id="preco-food-{{this.id}}">{{this.preco}}</span>
+                        <span class="desc-food" id="desc-food-{{this.id}}">{{this.desc}}</span>
+                        <span class="peso-food" id="peso-food-{{this.id}}">{{this.peso}}</span>
+                    </a>
+                    <nav class="menu-item-p">
+                        <div class="bt-menos-menu-item-p">
+                            <button class="bt-menos-menu-item-p-a" onclick="clicou_menos('{{this.id}}')">
+                                <img src="img/dash.svg" alt="dash.svg" width="100%" class="bt-menos-menu-item-p-img">
+                            </button>
+                        </div>
+                        <div class="bt-mais-menu-item-p">
+                            <button class="bt-mais-menu-item-p-a" onclick="clicou_mais('{{this.id}}')">
+                                <img src="img/plus.svg" alt="plus.svg" width="100%" class="bt-mais-mais-item-p-img">
+                            </button>
+                        </div>
+                        <form action="/veri-cadas-lis?preco=R$1,99&quant=0" method="POST" id="form-cadas-list-{{this.id}}" class="form-cadas-list">
+                            <input type="hidden" value="{{this.id}}" name="id" id="id">
+                            <input type="hidden" name="comem" id="comem">
+                            <input type="hidden" name="quant_preco" class="quant_preco" id="quant_preco-{{this.id}}" value="0">
+                            <button class="bt-adicionar-menu-item-p" id="bt-add-{{this.id}}" type="submit">
+                                Adicionar
+                            </button>
+                        </form>
+                    </nav>
+                </div>
+            </div>
+    <script>
+        var id = String(location.search.slice(1)).split('prato=')[1]
+        if (id) {
+            var cont = window.document.getElementById('cont')
+            var cx_produto = window.document.createElement("div")
+            cx_produto.id = 'cx_produto'
+            cx_produto.style.backgroundColor = 'white'
+            cx_produto.style.position = 'absolute'
+            cx_produto.style.width = '78%'
+            cx_produto.style.height = '80%'
+            cx_produto.style.bottom = '10%'
+            cx_produto.style.left = '10%'
+            cx_produto.style.right = '90%'
+            cx_produto.style.border = '1px solid #f2f2f2'
+            cx_produto.style.boxShadow = '0px 1px 4px rgb(0 0 0 / 5%)'
+            cont.style.filter = 'blur(4px)'
+            cont.style.width = '100%'
+            window.document.body.style.width = '50.9%'
+            var img_pro_id = window.document.getElementById('img-pro-'+id)
+            var img_pro = window.document.createElement("img")
+            img_pro.src = img_pro_id.src
+            img_pro.style.width = '25%'
+            img_pro.style.height = '25%'
+            img_pro.style.objectFit = 'cover'
+            img_pro.style.objectPosition = 'center'
+            img_pro.style.borderRadius = '5%'
+            img_pro.style.border = '1px solid #f2f2f2'
+            img_pro.style.boxShadow = '0px 1px 4px rgb(0 0 0 / 5%)'
+            img_pro.style.marginLeft = '5%'
+            img_pro.style.marginTop = '5%'
+            var txt_desc_origin = window.document.getElementById('desc-food-'+id)
+            var txt_desc = window.document.createElement('span')
+            txt_desc.innerText = txt_desc_origin.innerText
+            txt_desc.style.marginLeft = '60%'
+            txt_desc.style.fontSize = '1.5rem'
+            var txt_peso_origin = window.document.getElementById('peso-food-'+id)
+            var txt_peso = window.document.createElement('span')
+            txt_peso.innerText = txt_peso_origin.innerText
+            txt_peso.style.color = '#717171'
+            txt_peso.style.position = 'absolute'
+            txt_peso.style.marginLeft = '50%'
+            txt_peso.style.marginTop = '10%'
+            var txt_preco_origin = window.document.getElementById('preco-food-'+id)
+            var txt_preco = window.document.createElement('span')
+            txt_preco.innerText = txt_preco_origin.innerText
+            txt_preco.style.position = 'absolute'
+            txt_preco.style.marginLeft = '50%'
+            txt_preco.style.fontSize = '1.2rem'
+            txt_preco.style.marginTop = '13%'
+            var txt_comem = window.document.createElement('span')
+            txt_comem.style.position = 'absolute'
+            txt_comem.innerText = 'Algum comentário?'
+            txt_comem.style.color = '#717171'
+            txt_comem.style.fontWeight = 'bold'
+            txt_comem.style.marginTop = '18%'
+            txt_comem.style.marginLeft = '50%'
+            var comem = window.document.createElement("textarea")
+            comem.style.position = 'absolute'
+            comem.placeholder = 'Ex: tirar a cebola, maionese à parte etc.'
+            comem.spellcheck = 'true'
+            comem.style.resize = 'none'
+            comem.style.border = '2px solid #f2f2f2'
+            comem.style.boxShadow = '0px 2px 8px rgb(0 0 0 /'
+            comem.style.borderRadius = '5px'
+            comem.style.width = '46%'
+            comem.style.marginLeft = '50%'
+            comem.style.marginTop = '20%'
+            comem.style.height = '20%'
+            comem.maxLength = '140'
+            var bt_adicionar = window.document.createElement("button")
+            bt_adicionar.style.position = 'absolute'
+            bt_adicionar.style.marginTop = '43%'
+            bt_adicionar.className = 'btn btn-primary'
+            bt_adicionar.innerText = 'Adicionar'
+            bt_adicionar.style.borderRadius = '5px'
+            bt_adicionar.style.marginLeft = '88%'
+            var form_add = window.document.createElement("form")
+            form_add.appendChild(bt_adicionar)
+            var bt_fechar = window.document.createElement('img')
+            var bt_fechar_a = window.document.createElement('a')
+            bt_fechar_a.href = '/produtos'
+            bt_fechar.src = 'img/x.svg'
+            bt_fechar.style.position = 'absolute'
+            bt_fechar.style.width = '5%'
+            bt_fechar.style.marginLeft = '95%'
+            bt_fechar_a.appendChild(bt_fechar)
+            cx_produto.appendChild(bt_fechar_a)
+            cx_produto.appendChild(form_add)
+            cx_produto.appendChild(comem)
+            cx_produto.appendChild(txt_comem)
+            cx_produto.appendChild(txt_preco)
+            cx_produto.appendChild(txt_peso)
+            cx_produto.appendChild(txt_desc)
+            cx_produto.appendChild(img_pro)
+            window.document.body.appendChild(cx_produto)
+        }
+    </script>
+            {{#if this.ultimo}}
+                <a href="" class="mais">Ver Todos Os Produtos>></a>
+            {{else}}
+                
+            {{/if}}
+        {{else}}
+        
+        {{/each}}
+        <script>
+            var form = window.document.getElementsByClassName('form-cadas-list')
+            for (var cont = 0;cont < form.length;cont++) {
+                form[cont].addEventListener('submit', (event) => {
+                    
+                });
+            }
+        </script>
+        <script>
+            function clicou_menos(id) {
+                var quant_preco = window.document.getElementById('quant_preco-'+id)
+                var bt_add = window.document.getElementById('bt-add-'+id)
+                if (quant_preco.value == 1) {
+                    var bt_add_text = Number(bt_add.innerText.replace('Adicionar ', ''))
+                    var bt_add = window.document.getElementById('bt-add-'+id)
+                    bt_add.innerText = `Adicionar`
+                    quant_preco.value = Number(quant_preco.value) - 1
+                    var form = window.document.getElementById('form-cadas-list-'+id)
+                    form.action = String(form.action).replace(String(String(form.action).split('&')[1]), '')+'quant='+String(Number(String(String(form.action).split('&')[1]).replace('quant=', ''))-1)
+                    console.log(form.action)
+                } else if (quant_preco.value != 0) {
+                    var bt_add_text = Number(bt_add.innerText.replace('Adicionar ', ''))
+                    var bt_add = window.document.getElementById('bt-add-'+id)
+                    bt_add.innerText = `Adicionar ${bt_add_text-1}`
+                    quant_preco.value = Number(quant_preco.value) - 1
+                    var form = window.document.getElementById('form-cadas-list-'+id)
+                    form.action = String(form.action).replace(String(String(form.action).split('&')[1]), '')+'quant='+String(Number(String(String(form.action).split('&')[1]).replace('quant=', ''))-1)
+                    console.log(form.action)
+                } else {
+                    
+                }
+                
+            }
+            function clicou_mais(id) {
+                var bt_add = window.document.getElementById('bt-add-'+id)
+                if (Number(bt_add.innerText.replace('Adicionar ', ''))) {
+                    var bt_add_text = Number(bt_add.innerText.replace('Adicionar ', ''))
+                    bt_add.innerText = `Adicionar ${bt_add_text+1}`
+                    var quant_preco = window.document.getElementById('quant_preco-'+id)
+                    quant_preco.value = Number(quant_preco.value) + 1
+                } else {
+                    bt_add.innerText = `Adicionar 1`
+                    var quant_preco = window.document.getElementById('quant_preco-'+id)
+                    quant_preco.value = Number(quant_preco.value) + 1
+                }
+                var form = window.document.getElementById('form-cadas-list-'+id)
+                form.action = String(form.action).replace(String(String(form.action).split('&')[1]), '')+'quant='+String(Number(String(String(form.action).split('&')[1]).replace('quant=', ''))+1)
+                console.log(form.action)
+            }
+        </script>
+        <script>
+            var desc_food = window.document.getElementsByClassName('desc-food')
+            for (var cont = 0;cont <= desc_food.length;cont++) {
+                try {
+                    var nome = desc_food[cont].innerText
+                } catch {
+                    
+                }
+                var nome_1 = ''
+                if (nome.length > 38) {
+                    for (var cont2 = 0;cont2 < 35;cont2++) {
+                        nome_1 += nome[cont2]
+                    }
+                    nome_1 = nome_1+'...'
+                    desc_food[cont].innerText = nome_1
+                }
+            }
+        </script>
+        <script>
+            var desc_food = window.document.getElementsByClassName('peso-food')
+            for (var cont = 0;cont <= desc_food.length;cont++) {
+                try {
+                    var nome = desc_food[cont].innerText
+                } catch {
+
+                }
+                var nome_1 = ''
+                if (nome.length > 41) {
+                    for (var cont2 = 0;cont2 < 38;cont2++) {
+                        nome_1 += nome[cont2]
+                    }
+                    nome_1 = nome_1+'...'
+                    desc_food[cont].innerText = nome_1
+                }
+            }
+        </script>
+    </section>
+    <section class="lista">
+        <main>
+            {{#if lista}}
+                <ul class="lista-todos"></ul>
+                    {{#each lista}}
+                        <li class="lista-item" style="margin-top: {{this.m}}%;">
+                            <span class="lista-item-nome">
+                                {{this.item.quant}}<span class="lista-item-nome-x">x</span> 
+                                {{#if this.nome}}
+                                    {{this.nome}}
+                                {{else}}
+                                    {{this.item.nome}}
+                                {{/if}}
+                            </span>
+                            <span class="lista-item-preco">
+                                {{this.preco_vezes}}
+                            </span>
+                            <br>
+                            <form action="/veri-exclu-lis" method="post">
+                                <input type="hidden" value="{{this.item.id2}}" id="id2" name="id2"/>
+                                <button type="submit" class="btn btn-danger">Excluir</button>
+                            </form>
+                            <hr>
+                        </li>
+                    {{else}}
+                        
+                    {{/each}}
+                </ul>
+            {{else}}
+                <h4 class="tit-nt">Ainda Não Há Produtos Na Lista :(</h4>
+            {{/if}}
+        </main>
+        <header class="lista-tit-part">
+            {{#if lista}}
+                <h4 class="tit-lista">Produtos Na Lista: </h4>
+                <form action="produtos/cls-lista" method="post">
+                    <button class="btn btn-danger cls-bt">Limpar Lista</button>
+                </form>
+            {{else}}
+
+            {{/if}}
+        </header>
+        <footer class="pt-baixo">
+            {{#if lista}}
+                <strong>Preço Total: {{preco_tot}}</strong>
+                <form action="produtos/pedir" method="post">
+                    <button type="submit" id="bt-pedido">Fazer Pedido</button>
+                </form>
+            {{else}}
+            {{/if}}
+        </footer>
+    </section>
     </div>
 </div>
-<div class="row tit-prin-2" style="float: right;">
-    <div class="col-sm-12 menu-di" style="border: 1px solid #f2f2f2;box-shadow: 0px 1px 4px rgb(0 0 0 / 5%);padding-bottom: 143%;">
-        <div class="col-sm-12" style="border: 1px solid #f2f2f2;box-shadow: 0px 1px 4px rgb(0 0 0 / 5%);">
-            asd
-        </div>
-    </div>
-</div>
+{{else}}
+    <form method="POST" action="/veri-edit-exclu" id="form_dele"> 
+        <button type="submit" class="loca">
+            <svg xmlns="http://www.w3.org/2000/svg" width="50" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+                <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
+            </svg>
+        </button>
+    </form>
+    <h1 class="tit-nem">Ainda Não Há Produtos Cadastratros :(</h1>
+{{/if}}
