@@ -12,11 +12,12 @@
 
     .pt-prin-2 {
         width: 35.8%;
-        margin-right: 0%;
         border: 1px solid #f2f2f2;
         box-shadow: 0px 1px 4px rgb(0 0 0 / 5%);
         height: 100%;
         background-color: white;
+        position: fixed;
+        margin-left: 64.5%;
     }
     
     .tit-prin {
@@ -40,14 +41,121 @@
         transition-timing-function: linear;
         transition-duration: 0.1s;
     }
+
+    .main {
+        height: 90%;
+        padding-left: 5%;
+        padding-right: 5%;
+        margin-top: 10%;
+    }
+
+    .cx {
+        float: left;
+        width: 15.6%;
+        margin-left: 1%;
+        height: 36%;
+        border: 1px solid #f2f2f2;
+        box-shadow: 0px 1px 4px rgb(0 0 0 / 5%);
+        padding: 1%;
+        background-color: white;
+        margin-top: 1%;
+    }
+
+    .cx-2 {
+        float: left;
+        width: 15.6%;
+        margin-left: 1%;
+        height: 36%;
+        border: 1px solid #f2f2f2;
+        box-shadow: 0px 1px 4px rgb(0 0 0 / 5%);
+        background-color: white;
+    }
+
+    .img-food {
+        width: 100%;
+        display: inline-block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .preco-food {
+        font-size: 1.3vw;
+        font-weight: bold;
+        color: #3E3E3E;
+        display: inline-block;
+        width: 100%;
+    }
+
+    .desc-food {
+        width: 100%;
+        display: inline-block;
+        color: #3E3E3E;
+        font-size: 0.9vw;
+    }
+
+    .peso-food {
+        width: 100%;
+        display: inline-block;
+        color: #717171;
+        font-size: 0.8vw;
+    }
+
+    .mais {
+        display: inline-block;
+        text-align: center;
+        margin-top: 2%;
+    }
+
+    .mais-a {
+        
+    }
+
+    .produtos {
+        display: inline-block;
+    }
 </style>
 <div class="row pt-prin-1" style="float: left;">
     <div class="col-sm-12 tit-prin">
-        <svg xmlns="http://www.w3.org/2000/svg" width="50" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
-            <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
-        </svg>
-        <span style="left: 10%;">Todos Os Nossos Produtos</span>
+        <form method="POST" action="/veri-edit-exclu" id="form_dele"> 
+            <button type="submit" class="loca">
+                <svg xmlns="http://www.w3.org/2000/svg" width="50" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+                    <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
+                </svg>
+            </button>
+            <span style="margin-top: 0%;">Todos Os Nossos Produtos</span>
+        </form>
     </div>
+    <main class="col-sm-12 main">
+        <div class="col-sm-12 produtos">
+            {{#each produtos}}
+            {{#if this.col1}}
+                <div class="col-sm-12 cx-2">
+                    <img src="{{this.img}}" alt="{{this.desc}}" class="img-food" id="img-pro-{{this.id}}">
+                    <span class="preco-food">{{this.preco}}</span>
+                    <span class="desc-food" id="desc-food-{{this.id}}">{{this.desc}}</span>
+                    <span class="peso-food" id="peso-food-{{this.id}}">{{this.peso}}</span>
+                </div>
+            {{else}}
+                <div class="col-sm-12 cx">
+                    <img src="{{this.img}}" alt="{{this.desc}}" class="img-food" id="img-pro-{{this.id}}">
+                    <span class="preco-food">{{this.preco}}</span>
+                    <span class="desc-food" id="desc-food-{{this.id}}">{{this.desc}}</span>
+                    <span class="peso-food" id="peso-food-{{this.id}}">{{this.peso}}</span>
+                </div>
+            {{/if}}
+        {{else}}
+
+        {{/each}}
+        </div>
+
+        {{#if ultimo}}
+            <div class="col-sm-12 mais">
+                <a href="" class="mais-a">Ver Todos Os Produtos>></a>
+            </div>
+        {{else}}
+            
+        {{/if}}
+    </main>
 </div>
 <div class="row pt-prin-2" style="float: right;">
     <div class="col-sm-12 tit-menu">

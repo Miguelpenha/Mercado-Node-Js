@@ -125,11 +125,24 @@ const crypto = require('crypto')
                         lista = false
                     }
                     var preco_tot = Number()
-                    lista.forEach((i) => {
-                        preco_tot += Number(String(i.preco_vezes).replace('R$', '').replace(',', '.'))
-                    })
-                    preco_tot = 'R$'+String(preco_tot).replace('.', ',')
-                    res.render('produtos_home', {produtos: produtos, lista: lista, preco_tot: preco_tot})
+                    if (lista) {
+                        lista.forEach((i) => {
+                            preco_tot += Number(String(i.preco_vezes).replace('R$', '').replace(',', '.'))
+                        })
+                        preco_tot = 'R$'+String(preco_tot).replace('.', ',')
+                        if (produtos.length > 11) {
+                            res.render('produtos_home', {produtos: produtos, lista: lista, preco_tot: preco_tot, ultimo: true})   
+                        } else {
+                            res.render('produtos_home', {produtos: produtos, lista: lista, preco_tot: preco_tot, ultimo: false})
+                        }
+                        
+                    } else {
+                        if (produtos.length > 11) {
+                            res.render('produtos_home', {produtos: produtos, lista: lista, preco_tot: preco_tot, ultimo: true})   
+                        } else {
+                            res.render('produtos_home', {produtos: produtos, lista: lista, preco_tot: preco_tot, ultimo: false})
+                        }
+                    }
                 } else {
                     result.forEach((i) => {
                         if (l === false) {
@@ -148,28 +161,60 @@ const crypto = require('crypto')
                             m = 0
                             mul =1
                         }
-                        if (i.fileName_Img === 'Padrão.png') {
-                            produtos.push({
-                                nome: i.nome_Produto,
-                                desc: i.desc,
-                                img: `/uploads/${i.fileName_Img}`,
-                                preco: i.preco,
-                                id: i.id,
-                                m: m,
-                                pular: pular,
-                                peso: i.peso
-                            })
+                        if (cont > 5) {
+                            var col1 = true
+                            if (i.fileName_Img === 'Padrão.png') {
+                                produtos.push({
+                                    nome: i.nome_Produto,
+                                    desc: i.desc,
+                                    img: `/uploads/${i.fileName_Img}`,
+                                    preco: i.preco,
+                                    id: i.id,
+                                    m: m,
+                                    pular: pular,
+                                    peso: i.peso,
+                                    col1: col1
+                                })
+                            } else {
+                                produtos.push({
+                                    nome: i.nome_Produto,
+                                    desc: i.desc,
+                                    img: `/uploads/baixados/${i.fileName_Img}`,
+                                    preco: i.preco,
+                                    id: i.id,
+                                    m: m,
+                                    pular: pular,
+                                    peso: i.peso,
+                                    col1: col1
+                                })
+                            }
                         } else {
-                            produtos.push({
-                                nome: i.nome_Produto,
-                                desc: i.desc,
-                                img: `/uploads/baixados/${i.fileName_Img}`,
-                                preco: i.preco,
-                                id: i.id,
-                                m: m,
-                                pular: pular,
-                                peso: i.peso
-                            })
+                            var col1 = false
+                            if (i.fileName_Img === 'Padrão.png') {
+                                produtos.push({
+                                    nome: i.nome_Produto,
+                                    desc: i.desc,
+                                    img: `/uploads/${i.fileName_Img}`,
+                                    preco: i.preco,
+                                    id: i.id,
+                                    m: m,
+                                    pular: pular,
+                                    peso: i.peso,
+                                    col1: col1
+                                })
+                            } else {
+                                produtos.push({
+                                    nome: i.nome_Produto,
+                                    desc: i.desc,
+                                    img: `/uploads/baixados/${i.fileName_Img}`,
+                                    preco: i.preco,
+                                    id: i.id,
+                                    m: m,
+                                    pular: pular,
+                                    peso: i.peso,
+                                    col1: col1
+                                })
+                            }
                         }
                         cont++
                     })
@@ -216,8 +261,11 @@ const crypto = require('crypto')
                     } catch {
 
                     }
-                    
-                    res.render('produtos_home', {produtos: produtos, lista: lista, preco_tot: preco_tot})
+                    if (produtos.length > 11) {
+                        res.render('produtos_home', {produtos: produtos, lista: lista, preco_tot: preco_tot, ultimo: true})   
+                    } else {
+                        res.render('produtos_home', {produtos: produtos, lista: lista, preco_tot: preco_tot, ultimo: false})
+                    }
                 }
             })
         }
