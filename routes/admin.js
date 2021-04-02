@@ -1,4 +1,7 @@
-require('dotenv').config()
+const env = require('../config/env').env
+require('dotenv').config({
+    path: env
+})
 const ProdutoModels = require('../models/Produto')
 const express = require('express')
 const admin = express.Router()

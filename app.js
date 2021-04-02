@@ -1,5 +1,10 @@
 // Importações
-    require('dotenv').config()
+    const env = require('./config/env').env
+    const urlMongo = require('./config/db').urlMongo
+    const port = require('./config/port')
+    require('dotenv').config({
+        path: env
+    })
     const express = require('express')
     const handlebars = require('express-handlebars')
     const bodyParser = require('body-parser')
@@ -18,9 +23,6 @@
     const cookieParser = require('cookie-parser')
     const crypto = require('crypto')
     const path = require('path')
-    const fs = require('fs')
-    const urlMongo = require('./config/db').urlMongo
-    const { assert } = require('console')
 // Config geral
     // Sessão
         app.use(session({
@@ -299,6 +301,6 @@
                 res.status(404).render('404')
             })
 // Config de porta
-    app.listen(process.env.PORT || process.env.PORTA, () => {
+    app.listen(port, () => {
         console.log('Servidor Rodando')
     })
