@@ -231,7 +231,6 @@
 <div id="cont">
 {{#if produtos}}
     <header id="produtos_tit">
-        <h1 class="tit">Todos Os Nossos Produtos</h1>
         <form method="POST" action="/veri-edit-exclu" id="form_dele"> 
             <button type="submit" class="loca">
                 <svg xmlns="http://www.w3.org/2000/svg" width="50" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
@@ -239,6 +238,7 @@
                 </svg>
             </button>
         </form>
+        <h1 class="tit">Todos Os Nossos Produtos</h1>
     </header>
     <section class="produtos" id="produtos">
         {{#each produtos}}
