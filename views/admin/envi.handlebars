@@ -2,110 +2,69 @@
     .req{
         color: #d93025;
     }
-    
-    .campo {
-        width: 97.5%;
+
+    #form {
         display: block;
         margin-left: auto;
         margin-right: auto;
+        width: 40%;
+        background-color: #e4e1e1;
+        margin-top: 5%;
+        border-radius: 8px;
+        padding-top: 1%;
+        margin-bottom: 10%;
     }
 
-    .campo input {
-        width: 100%;
-        padding: 12px 20px;
-        margin: 8px 0;
-        display: inline-block;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        box-sizing: border-box;
-        transition-timing-function: linear;
-        transition-duration: 0.1s;
-        background-color: white;
-    }
-
-    .campo textarea {
-        resize: none;
-    }
-    
-    input:focus, textarea:focus {
-        box-shadow: 0 0 0 0;
-        outline: 0;
-        border: 1px solid #0974ff;
-    }
-
-    .btns {
-        width: 100%;
-    }
-
-    button {
-        width: 45%;
-        color: white;
-        padding: 14px 20px;
-        margin: 8px 0;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        margin-left: 3%;
-    }
-
-    #form {
-        border-radius: 5px;
-        background-color: #f2f2f2;
-        padding: 20px;
-        width: 60%;
+    .campo {
         display: block;
         margin-left: auto;
         margin-right: auto;
         margin-top: 2%;
-        margin-bottom: 2%;
-    }
-    .campo-file input{
-        cursor: pointer;
     }
 
-    .campo-jt-1 {
-        width: 100%;
-        display: inline-block;
-        box-sizing: border-box;
-    }
-
-    .campo-jt-1 .campo-jt {
-        width: 48%;
+    .campo-input {
         display: block;
-        margin-left: 1.3%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .form-label {
+        padding-left: 2.5%;
+    }
+
+    .label-ft {
+        padding-left: 5%;
+    }
+
+    .btn-envi {
+        width: 80%;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 3%;
+        padding-bottom: 10%;
+    }
+
+    .btn-cancel {
+        float: right;
+    }
+
+    .btn-envi-btn {
         float: left;
     }
 
-    .campo-jt-1 .campo-jt textarea {
-        resize: none;
-        padding: 12px 20px;
-        width: 100%;
-        margin: 8px 0;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        transition-timing-function: linear;
-        transition-duration: 0.1s;
+    .btn-cancel-btn {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 90%;
     }
 
-    .campo-jt-1 .campo-jt input[type=text]{
-        padding: 12px 20px;
-        width: 100%;
-        margin: 8px 0;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        transition-timing-function: linear;
-        transition-duration: 0.1s;
-    }
-
-    .campo-jt-1 .campo-jt input[type=file] {
-        padding: 12px 20px;
-        width: 100%;
-        margin: 8px 0;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        transition-timing-function: linear;
-        transition-duration: 0.1s;
-        background-color: white;
+    .btn-envi-btn-input {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 90%;
     }
 </style>
 {{#if edit}}
@@ -118,60 +77,163 @@
             <input type="hidden" name="originalname" id="originalname" value="{{nomeOrigin}}">
             <input type="hidden" name="senha" id="senha" value="{{senha}}">
         </div>
-        <div class="campo">
-            <label for="nome">Nome: </label><span class="req">*</span><br><input type="text" required id="nome" name="nome" value="{{nome}}"/>
-        </div>
-        <div class="campo-jt-1">
-            <div class="campo-jt">
-            <label for="categoria">Categoria: </label><span class="req">*</span><br><input type="text" required id="categoria" name="categoria" value="{{categoria}}"/>
+        <div class="row campo">
+            <div class="row campo-nome">
+                <label for="Nome do produto" class="form-label">
+                    Nome: <span class="req">*</span>
+                </label>
             </div>
-            <div class="campo-jt">
-                <label for="peso">Peso: </label><span class="req">*</span><br><input type="text" required id="peso" name="peso" value="{{peso}}"/>
-            </div>
-        </div>
-        <br>
-        <div class="campo-jt-1">
-            <div class="campo-jt">
-                <label for="marca">Marca: </label><span class="req">*</span><br><input type="text" required id="marca" name="marca" value="{{marca}}"/>
-            </div>
-            <div class="campo-jt">
-                <label for="preço">Preço: </label><span class="req">*</span><br><input type="text" required id="preco" name="preco" value="{{preco}}"/>
+            <div class="row campo-input">
+                <input type="text" required id="nome" name="nome" class="form-control" value="{{nome}}">
             </div>
         </div>
-        <br>
-        <div class="campo-jt-1">
-            <div class="campo-jt">
-                <label for="descrição-do-produto">Descrição do Produto: </label><span class="req">*</span><br><textarea required id="desc" name="desc" spellcheck="true">{{desc}}</textarea>
+        <div class="row campo">
+            <div class="row campo-nome">
+                <label for="Categoria do produto" class="form-label">
+                    Categoria: <span class="req">*</span>
+                </label>
             </div>
-            <div class="campo-jt campo-file">
-                <label for="foto-do-produto">Foto do Produto: </label><br><input type="file" name="file" id="file">
+            <div class="row campo-input">
+               <input type="text" required id="categoria" name="categoria" class="form-control" value="{{categoria}}">
             </div>
         </div>
-        <div class="btns">
-            <button type="submit" class="btn btn-success">Enviar</button>
-            <a href="painel-admin">
-                <button type="button" class="btn btn-danger">Cancelar</button>
-            </a>
+        <div class="row campo">
+            <div class="row campo-nome">
+                <label for="Peso do produto" class="form-label">
+                    Peso: <span class="req">*</span>
+                </label>
+            </div>
+            <div class="row campo-input">
+                <input type="text" required id="peso" name="peso" class="form-control" value="{{peso}}">
+            </div>
+        </div>
+        
+        <div class="row campo">
+            <div class="row campo-nome">
+                <label for="Marca do produto" class="form-label">
+                    Marca: <span class="req">*</span>
+                </label>
+            </div>
+            <div class="row campo-input">
+                <input type="text" required id="marca" name="marca" class="form-control" value="{{marca}}">
+            </div>
+        </div>
+        <div class="row campo">
+            <div class="row campo-nome">
+                <label for="Preço do produto" class="form-label">
+                    Preço: <span class="req">*</span>
+                </label>
+            </div>
+            <div class="row campo-input">
+                <input type="text" required id="preco" name="preco" class="form-control" value="{{preco}}">
+            </div>
+        </div>
+        <div class="row campo">
+            <div class="row campo-nome">
+                <label for="Descrição do produto" class="form-label">
+                    Descrição Do Produto: <span class="req">*</span>
+                </label>
+            </div>
+            <div class="row campo-input">
+                <textarea required id="desc" name="desc" class="form-control">{{desc}}</textarea>
+            </div>
+        </div>
+        <div class="row campo">
+            <div class="row campo-nome">
+                <label for="Foto do produto" class="form-label row label-ft">Foto Do Produto: </label>
+            </div>
+            <div class="row campo-input">
+                <input type="file" name="file" id="file" class="form-control">
+            </div>
+        </div>
+        <div class="row btn-envi">
+            <div class="col-6 btn-envi-btn">
+                <input type="submit" value="Cadastrar" class="btn btn-success btn-envi-btn-input">
+            </div>
+            <div class="col-6 btn-cancel">
+                <a href="painel-admin" style="text-decoration: none;">
+                    <button type="button" class="btn btn-danger btn-cancel-btn">Cancelar</button>
+                </a>
+            </div>
         </div>
     </form>
 {{else}}
-    <form method="POST" enctype="multipart/form-data" action="/veri-produto">
-        <input type="hidden" value="false" name="api" id="api"/>
-        <input type="hidden" name="login" id="login" value="{{login}}">
-        <input type="hidden" name="senha" id="senha" value="{{senha}}">
-        Nome: <span class="req">*</span><br><input type="text" required id="nome" name="nome"/>
-        <br>
-        Categoria: <span class="req">*</span><br><input type="text" required id="categoria" name="categoria"/>
-        <br>
-        Peso: <span class="req">*</span><br><input type="text" required id="peso" name="peso"/>
-        <br>
-        Marca: <span class="req">*</span><br><input type="text" required id="marca" name="marca"/>
-        <br>
-        Preço: <span class="req">*</span><br><input type="text" required id="preco" name="preco"/>
-        <br>
-        Descrição Do Produto: <span class="req">*</span><br><textarea required id="desc" name="desc"></textarea>
-        <br>
-        Foto Do Produto: <br><input type="file" name="file" id="file">
-        <input type="submit" value="Enviar"/>
+    <form method="POST" enctype="multipart/form-data" action="/veri-produto" id="form">
+        <div class="secrets">
+            <input type="hidden" value="false" name="api" id="api"/>
+            <input type="hidden" name="login" id="login" value="{{login}}">
+            <input type="hidden" name="senha" id="senha" value="{{senha}}">
+        </div>
+        <div class="row campo">
+            <div class="row campo-nome">
+                <label for="Nome do produto" class="form-label">
+                    Nome: <span class="req">*</span>
+                </label>
+            </div>
+            <div class="row campo-input">
+                <input type="text" required id="nome" name="nome" class="form-control">
+            </div>
+        </div>
+        <div class="row campo">
+            <div class="row campo-nome">
+                <label for="Categoria do produto" class="form-label">
+                    Categoria: <span class="req">*</span>
+                </label>
+            </div>
+            <div class="row campo-input">
+               <input type="text" required id="categoria" name="categoria" class="form-control">
+            </div>
+        </div>
+        <div class="row campo">
+            <div class="row campo-nome">
+                <label for="Peso do produto" class="form-label">
+                    Peso: <span class="req">*</span>
+                </label>
+            </div>
+            <div class="row campo-input">
+                <input type="text" required id="peso" name="peso" class="form-control">
+            </div>
+        </div>
+        <div class="row campo">
+            <div class="row campo-nome">
+                <label for="Marca do produto" class="form-label">
+                    Marca: <span class="req">*</span>
+                </label>
+            </div>
+            <div class="row campo-input">
+                <input type="text" required id="marca" name="marca" class="form-control">
+            </div>
+        </div>
+        <div class="row campo">
+            <div class="row campo-nome">
+                <label for="Preço do produto" class="form-label">
+                    Preço: <span class="req">*</span>
+                </label>
+            </div>
+            <div class="row campo-input">
+                <input type="text" required id="preco" name="preco" class="form-control">
+            </div>
+        </div>
+        <div class="row campo">
+            <div class="row campo-nome">
+                <label for="Descrição do produto" class="form-label">
+                    Descrição Do Produto: <span class="req">*</span>
+                </label>
+            </div>
+            <div class="row campo-input">
+                <textarea required id="desc" name="desc" class="form-control"></textarea>
+            </div>
+        </div>
+        <div class="row campo">
+            <div class="row campo-nome">
+                <label for="Foto do produto" class="form-label row label-ft">Foto Do Produto: </label>
+            </div>
+            <div class="row campo-input">
+                <input type="file" name="file" id="file" class="form-control">
+            </div>
+        </div>
+        <div class="row btn-envi">
+            <input type="submit" value="Cadastrar" class="btn btn-success">
+        </div>
     </form>
 {{/if}}
